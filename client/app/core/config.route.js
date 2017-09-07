@@ -56,6 +56,10 @@
                 url: '/pm/manage',
                 templateUrl: 'app/pm/manage.html'
             });
+            $stateProvider.state('pm/add',{
+                url: '/pm/add',
+                templateUrl: 'app/pm/add.html'
+            });
 
             //pm by contract
             $stateProvider.state('pm/contract/all',{
