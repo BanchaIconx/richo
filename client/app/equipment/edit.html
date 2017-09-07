@@ -1,0 +1,48 @@
+<div class="page" ng-controller="editEquipmentCtrl">
+
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h3><button back-button></button> เพิ่มข้อมูลเคาน์เตอร์</h3>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">สัญญา : {{title.t1}} > เขตไปรษณีย์ : {{title.t2}} > ที่ทำการไปรษณีย์ : {{title.t3}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row form-group">
+                        <div class="col-sm-12">
+                            <dd>เคาน์เตอร์ : </dd>
+                        </div>
+                        <div class="col-sm-12">
+                            <dd>อปกรณ์รายการที่ : </dd>
+                        </div>
+                        <div class="col-sm-12">
+                            <dd>ชื่อรายการ : </dd>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-4">
+                            <label for="">Brand</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="">Model</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="">Serial No.</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-info">บันทึกข้อมูล</button>
+                            <a onclick="window.history.back()" class="btn btn-default btn-w-xs" style="margin-left:10px;">ยกเลิก</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

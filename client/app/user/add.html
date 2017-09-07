@@ -1,0 +1,49 @@
+<div class="page" ng-controller="addUserCtrl">
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h3><button back-button></button> เพิ่มข้อมูลผู้ใช้ระบบ</h3>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">ข้อมูลผู้ใช้งาน</h3>
+                </div>
+                <div class="panel-body">
+                    <form name="submitForm" novalidate class="form-horizontal form-validation" ng-submit="add()">
+                        <fieldset>
+                            <div class="row form-group">
+                                <div class="col-sm-2">
+                                    <label for="">รหัสผู้ใช้งาน</label>
+                                    <input type="text" class="form-control" required ng-model="model.userId">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="">ชื่อผู้ใช้งาน</label>
+                                    <input type="text" class="form-control" required ng-model="model.userName">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="">สาขาของ Ricoh</label>
+                                    <select name="" id="" class="form-control" required ng-model="branchId" ng-options="x.key as x.value for x in ddlBranches">
+                                    <option value="">กรุณาเลือก</option>
+                                </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="">รหัสผ่าน</label>
+                                    <input name="password" type="password" class="form-control" required ng-model="model.password">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="">รหัสผ่าน (อีกครั้ง)</label>
+                                    <input type="password" class="form-control" required ng-model="confirmPassword" ng-match="password">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-info">บันทึกข้อมูล</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

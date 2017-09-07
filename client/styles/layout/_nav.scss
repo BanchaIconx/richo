@@ -33,7 +33,7 @@
         }
 
         .nav-divider {
-            margin: 10px 0 10px 15px;
+            margin: 0;
             border-width: 1px;
             border-style: solid;
             border-color: transparent;
@@ -92,7 +92,7 @@
                 position: relative;
                 white-space: nowrap;
                 display: block;
-                padding: 15px 15px;
+                padding: 10px 15px;
                 @include transition(all $nav-transition_duration ease-in-out);
 
                 .badge {

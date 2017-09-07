@@ -1,0 +1,75 @@
+<div class="page" ng-controller="manageUserCtrl">
+
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h3>จัดการข้อมูลผู้ใช้ระบบ</h3>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">เงื่อนไขการค้นหา</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-validation" ng-submit="search()">
+                        <div class="row form-group">
+                            <div class="col-sm-6">
+                                <label for="">สาขาของ Ricoh</label>
+                                <select name="" id="" class="form-control" ng-model="model.branchId" ng-options="x.key as x.value for x in ddlBranches">
+                                    <option value="">ทั้งหมด</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="">รหัสผู้ใช้งาน</label>
+                                <input type="text" class="form-control" ng-model="model.userId">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="">ชื่อผู้ใช้งาน</label>
+                                <input type="text" class="form-control" ng-model="model.userName">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-info">ค้นหา</button>
+                                <a href="#/user/add" class="btn btn-info">เพิ่มผู้ใช้</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">รายชื่อผู้ใช้งาน</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-condensed">
+                            <thead>
+                                <th width="5%"></th>
+                                <th>รหัสผู้ใช้งาน</th>
+                                <th>ชื่อผู้ใช้งาน</th>
+                                <th>สาขา</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in data.userViews">
+                                    <td>
+                                        <a href="#/user/edit/{{x.userId}}"><i class="zmdi zmdi-edit"></i></a>
+                                    </td>
+                                    <td>{{x.userId}}</td>
+                                    <td>{{x.userName}}</td>
+                                    <td>{{x.userBranches}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center">
+                        <uib-pagination class="no-margin" boundary-links="true" total-items="data.totalItems" ng-model="model.pageIndex" previous-text="&lsaquo;"
+                            next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="search()" max-size="5"
+                            items-per-page="data.itemPerPage"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

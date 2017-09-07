@@ -24,8 +24,9 @@
         var date = new Date();
         var year = date.getFullYear();
         var main = {
-            brand: 'Material',
-            name: 'Lisa',
+            brand: 'Preventive Maintenance System',
+            brandShort: 'RICOH',
+            name: 'นายช่าง เชี่ยวชาญ (สาขาแจ้งวัฒนะ)',
             year: year,
             layout: 'wide',                                 // 'boxed', 'wide'
             menu: 'vertical',                               // 'horizontal', 'vertical'
@@ -33,7 +34,7 @@
             fixedHeader: true,                              // true, false
             fixedSidebar: true,                             // true, false
             pageTransition: pageTransitionOpts[0],          // 0, 1, 2, 3... and build your own
-            skin: '12'                                      // 11,12,13,14,15,16; 21,22,23,24,25,26; 31,32,33,34,35,36
+            skin: '31'                                      // 11,12,13,14,15,16; 21,22,23,24,25,26; 31,32,33,34,35,36
         };
         var color = {
             primary:    '#009688',

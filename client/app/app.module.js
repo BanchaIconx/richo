@@ -6,18 +6,17 @@
          'app.core'
         
         // Custom Feature modules
-        ,'app.chart'
-        ,'app.ui'
-        ,'app.ui.form'
-        ,'app.ui.form.validation'
         ,'app.page'
-        ,'app.table'
+        ,'app.user'
+        ,'app.equipment'
+        ,'app.pm'
+        ,'app.pmByContract'
+        ,'app.pmByBranch'
         
         // 3rd party feature modules
         ,'mgo-angular-wizard'
         ,'ui.tree'
         ,'ngMap'
-        // ,'textAngular'
     ]);
 
 })();

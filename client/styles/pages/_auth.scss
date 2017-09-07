@@ -75,18 +75,18 @@
 
     h1 {
         font-weight: normal;
-        color: $brand-primary;
-        font-size: 38px;
-        margin-bottom: 40px;
-        a {
-            color: $brand-primary;
-        }
+        color: $dark-lighter;
+        font-size: 24px;
+    }
+
+    img {
+        padding: 0 30%;
     }
 
     .card {
         @extend .z-depth-2;
         .card-content {
-            padding: 30px 20px;
+            padding: 20px 20px 0 20px;
         }
     }
 
@@ -117,5 +117,10 @@
                 text-decoration: none;
             }
         }
+    }
+
+    .btn-orange {
+        background-color: $brand-orange !important;
+        color: $bright;
     }
 }

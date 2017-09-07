@@ -22,7 +22,8 @@ $brand-success:         #8BC34A !default; // Light Green 500
 $brand-info:            #00BCD4 !default; // Cyan 500
 $brand-info-alt:        #7E57C2 !default; // Deep Purple 400
 $brand-warning:         #FFCA28 !default; // Amber 400
-$brand-danger:          #F44336 !default; // Red 500
+$brand-danger:          #F44336 !default; // Red 500 
+$brand-orange:          #f46236 !default;
 
 $skin:                  $brand-primary;
 $skin-light:            #5C6BC0;
@@ -69,7 +70,7 @@ $font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
 $font-family-base:        $font-family-sans-serif !default;
 
-$font-size-base:          14px !default;
+$font-size-base:          13px !default; //14px !default;
 $font-size-large:         ceil(($font-size-base * 1.25)) !default; // ~18px
 $font-size-small:         ceil(($font-size-base * 0.85)) !default; // ~12px
 
@@ -482,8 +483,8 @@ $pagination-hover-bg:                  #fff !default;
 $pagination-hover-border:              #aaa !default;
 
 $pagination-active-color:              #fff !default;
-$pagination-active-bg:                 $brand-primary !default;
-$pagination-active-border:             $brand-primary !default;
+$pagination-active-bg:                 $brand-info !default;
+$pagination-active-border:             $brand-info !default;
 
 $pagination-disabled-color:            $gray-light !default;
 $pagination-disabled-bg:               $state-default-bg !default;
@@ -730,7 +731,7 @@ $list-group-link-heading-color: #333 !default;
 
 $panel-bg:                    #fff !default;
 $panel-body-padding:          15px !default;
-$panel-heading-padding:       10px 15px !default;
+$panel-heading-padding:       5px 10px !default;
 $panel-footer-padding:        $panel-heading-padding !default;
 $panel-border-radius:         $border-radius-base !default;
 

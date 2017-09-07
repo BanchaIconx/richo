@@ -31,24 +31,24 @@
             > li {
                 &:hover {
                     > a {
-                        background-color: $light_bg_link_hover_bg;
-                        color: $light_bg_link_hover_color;
-                        > .icon-has-ul { color: $light_bg_link_hover_color; }
+                        background-color: $brand-orange;
+                        color: $bright;
+                        > .icon-has-ul { color: $bright; }
                     }
-                    > .icon-has-ul-h { color: $light_bg_link_hover_color; }
+                    > .icon-has-ul-h { color: $bright; }
                 }
                 &.active {
                     > a {
-                        // background-color: $light_bg_link_active_bg;
-                        color: $light_bg_link_active_color;
-                        > .icon-has-ul { color: $light_bg_link_active_color; }
+                        background-color: $brand-orange;
+                        color: $bright;
+                        > .icon-has-ul { color: $bright; }
                     }                        
                 }
 
                 // overrides Bootstrap 
-                > a:focus {
-                    background-color: $light_bg_link_hover_bg;
-                }
+                // > a:focus {
+                //     background-color: $light_bg_link_hover_bg;
+                // }
             }
 
             // sub menu
@@ -180,7 +180,7 @@
                     > li {
                         &:hover {
                             a {
-                                background-color: $light_bg_link_active_bg;
+                                background-color: $brand-orange;
                             }
                         }
                     }
