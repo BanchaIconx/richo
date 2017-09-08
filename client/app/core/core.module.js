@@ -6,6 +6,7 @@
          'ngAnimate'
         ,'ngAria'
         ,'ngMessages'
+        ,'angular-md5'
 
         // Custom modules
         ,'app.layout'

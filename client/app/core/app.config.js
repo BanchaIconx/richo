@@ -46,11 +46,13 @@
             text:       '#3D4051',
             gray:       '#EDF0F1'
         };
+        var apiUrl = 'http://localhost:55969';
 
         return {
             pageTransitionOpts: pageTransitionOpts,
             main: main,
-            color: color
+            color: color,
+            apiUrl: apiUrl
         }
     }
 

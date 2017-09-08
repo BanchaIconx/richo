@@ -12,6 +12,7 @@
         ,'app.pm'
         ,'app.pmByContract'
         ,'app.pmByBranch'
+        ,"app.common"
         
         // 3rd party feature modules
         ,'mgo-angular-wizard'
