@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('app.core')
-        .factory('appConfig', [appConfig])
+        .factory('appConfig', ['$sessionStorage' ,appConfig])
         .config(['$mdThemingProvider', mdConfig]);
 
-    function appConfig() {
+    function appConfig($sessionStorage) {
         var pageTransitionOpts = [
             {
                 name: 'Fade up',
@@ -23,10 +23,11 @@
         ];
         var date = new Date();
         var year = date.getFullYear();
+        var _user = $sessionStorage.user.userName;
         var main = {
             brand: 'Preventive Maintenance System',
             brandShort: 'RICOH',
-            name: 'นายช่าง เชี่ยวชาญ (สาขาแจ้งวัฒนะ)',
+            name: _user.userName + '( ' + _user.branch.ricohBranchName + ' ) ' ,
             year: year,
             layout: 'wide',                                 // 'boxed', 'wide'
             menu: 'vertical',                               // 'horizontal', 'vertical'

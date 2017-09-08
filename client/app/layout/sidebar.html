@@ -1,23 +1,26 @@
 
-<div class="nav-wrapper">
+<div class="nav-wrapper" ng-controller="menuCtrl">
     <ul id="nav"
     class="nav"
     data-slim-scroll
     data-collapse-nav
     data-highlight-active>
         <!-- <li><a md-button aria-label="meanu" href="#/dashboard"><i class="zmdi zmdi-home"></i><span data-translate="DASHBOARD"></span> </a></li> -->
-        <li class="nav-divider"></li>
-        <li><a md-button aria-label="meanu" href="#/pm/contract/all"><i class="fa fa-bar-chart"></i>สถานะการทำ PM รายสัญญา </a></li>
-        <li class="nav-divider"></li>
-        <li><a md-button aria-label="meanu" href="#/pm/branch/all"><i class="fa fa-bar-chart"></i>สถานะการทำ PM รายสาขา </a></li>
-        <li class="nav-divider"></li>
-        <li><a md-button aria-label="meanu" href="#/pm/add"><i class="fa fa-plus"></i>สร้างใบงาน </a></li>
+        <li class="nav-divider" ng-show="userRole == 2"></li>
+        <li ng-show="userRole == 2"><a md-button aria-label="meanu" href="#/pm/contract/all"><i class="fa fa-bar-chart"></i>สถานะการทำ PM รายสัญญา </a></li>
+        <li class="nav-divider" ng-show="userRole == 2"></li>
+        <li ng-show="userRole == 2"><a md-button aria-label="meanu" href="#/pm/branch/all"><i class="fa fa-bar-chart"></i>สถานะการทำ PM รายสาขา </a></li>
+        <li class="nav-divider" ng-show="userRole == 1"></li>
+        <li ng-show="userRole == 1"><a md-button aria-label="meanu" href="#/pm/add"><i class="fa fa-plus"></i>สร้างใบงาน </a></li>
         <li class="nav-divider"></li>
         <li><a md-button aria-label="meanu" href="#/pm/manage"><i class="fa fa-file-o"></i>จัดการใบงาน </a></li>
-        <li class="nav-divider"></li>
-        <li><a md-button aria-label="meanu" href="#/equipment/manage"><i class="fa fa-pencil-square-o"></i>แก้ไขข้อมูลอุปกรณ์ </a></li>
-        <li class="nav-divider"></li>
-        <li><a md-button aria-label="meanu" href="#/user/manage"><i class="fa fa-user"></i>จัดการข้อมูลผู้ใช้ </a></li>
+        <li class="nav-divider" ng-show="userRole == 2"></li>
+        <li ng-show="userRole == 2"><a md-button aria-label="meanu" href="#/equipment/manage"><i class="fa fa-pencil-square-o"></i>แก้ไขข้อมูลอุปกรณ์ </a></li>
+        
+        <!-- <li class="nav-divider" ng-repeat-start="x in menuGroup"></li>
+        <li ng-repeat-end><a md-button aria-label="meanu" href="{{x.menuFunctionUrl}}"><i class="{{x.menuFunctionIcon}}"></i>{{x.menuFunctionName}} </a></li> -->
+
+        <!-- default menu -->
         <li class="nav-divider"></li>
         <li><a md-button aria-label="meanu" href="#/user/changePassword"><i class="fa fa-key"></i>เปลี่ยนรหัสผ่าน </a></li>
         <li class="nav-divider"></li>

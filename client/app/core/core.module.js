@@ -7,6 +7,7 @@
         ,'ngAria'
         ,'ngMessages'
         ,'angular-md5'
+        ,'ngStorage'
 
         // Custom modules
         ,'app.layout'
