@@ -1,5 +1,5 @@
 #loader-container {
-    background: #EDF0F1 url('../images/audio.svg') no-repeat center center;
+    background: rgba(0, 0, 0, 0.45) url('../images/spinner.svg') no-repeat center center;
     position: fixed;
     overflow: hidden;
     top: 0;

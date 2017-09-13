@@ -14,7 +14,8 @@
 
         function onError(httpResponse) {
             var callback = function () { };
-            alertModalFactory.danger(httpResponse.data.error ? httpResponse.data.error : httpResponse.statusText, callback);
+            var text = (httpResponse.data.Message != undefined) ? httpResponse.data.Message : httpResponse.statusText;
+            alertModalFactory.danger(httpResponse.data.error ? httpResponse.data.error : text, callback);
         }
 
         return {

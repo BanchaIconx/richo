@@ -10,8 +10,8 @@
                             <h3 class="panel-title"> สัญญา : {{model.contractName}}</h3>
                         </div>
                         <div class="panel-body">
-                            <p>จำนวนทั้งหมด : {{model.total | number}} จำนวนที่ทำ PM แล้ว : {{model.success | number}} จำนวนคงเหลือ : {{model.remain | number}}</p>
-        
+                            <p>จำนวนทั้งหมด : {{model.total | number}} จำนวนที่ทำ PM แล้ว : {{model.totalComplete | number}} จำนวนคงเหลือ : {{model.totalNoComplete | number}}</p>
+                            
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover table-condensed">
                                     <thead>
@@ -22,14 +22,14 @@
                                         <th>จำนวนคงเหลือ</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr ng-repeat="x in model.data">
                                             <td>
-                                                <a href="#/pm/contract/all/0/0"><i class="fa fa-search"></i></a>
+                                                <a href="#/pm/contract/byContractAndRegion/{{x.po.poRegionId}}/{{model.contractName}}/{{('เขต' + x.po.poRegion.districtName + ' ' + x.po.poRegion.provinceName)}}"><i class="fa fa-search"></i></a>
                                             </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{('เขต' + x.po.poRegion.districtName + ' ' + x.po.poRegion.provinceName)}}</td>
+                                            <td>{{x.noOfCounter | number}}</td>
+                                            <td>{{x.completeNoOfCounter | number}}</td>
+                                            <td>{{x.noOfCounter -x.completeNoOfCounter | number}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

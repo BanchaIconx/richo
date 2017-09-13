@@ -10,34 +10,35 @@
                     <h3 class="panel-title">กรุณาเลือกเคาน์เตอร์ที่ทำการไปรษณีย์</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-validation" ng-submit="search()">
-                        <div class="row form-group">
-                            <div class="col-sm-3">
-                                <label for="">สัญญา PM</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="">ทั้งหมด</option>
+                    <div class="row form-group">
+                        <div class="col-sm-3">
+                            <label for="">สัญญา PM</label>
+                            <select name="" id="" class="form-control" ng-model="model.contractId" ng-options="x.key as x.value for x in ddlContracts"
+                                ng-change="getDdlPoRegion(model.contractId)">
+                                    <option value="">กรุณาเลือก</option>
                                 </select>
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="">เขตไปรษณีย์</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="">ทั้งหมด</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="">ที่ทำการไปรษณีย์</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="">ทั้งหมด</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="">เคาน์เตอร์</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="">ทั้งหมด</option>
-                                </select>
-                            </div>
                         </div>
-                    </form>
+                        <div class="col-sm-3">
+                            <label for="">เขตไปรษณีย์</label>
+                            <select name="" id="" class="form-control" ng-model="model.regionId" ng-options="x.key as x.value for x in ddlRegions" 
+                            ng-change="getDdlPo(model.regionId)">
+                                    <option value="">กรุณาเลือก</option>
+                                </select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="">ที่ทำการไปรษณีย์</label>
+                            <select name="" id="" class="form-control" ng-model="model.officeId" ng-options="x.key as x.value for x in ddlOffices" 
+                            ng-change="getDdlWicked()">
+                                    <option value="">กรุณาเลือก</option>
+                                </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="">เคาน์เตอร์</label>
+                            <select name="" id="" class="form-control" ng-model="model.counterId" ng-options="x.value as x.value for x in ddlCounter" ng-change="search()">
+                                    <option value="">กรุณาเลือก</option>
+                                </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,23 +59,23 @@
                                 <th>Serial</th>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr ng-repeat="x in model.data.contractPoDataItems">
                                     <td>
-                                        <a href="#/equipment/edit/0"><i class="zmdi zmdi-edit"></i></a>
+                                        <a href ng-click="goPage('edit', x)"><i class="zmdi zmdi-edit"></i></a>
                                     </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{x.itemNo}}</td>
+                                    <td>{{x.itemName}}</td>
+                                    <td>{{x.brand}}</td>
+                                    <td>{{x.model}}</td>
+                                    <td>{{x.serial}}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href="#/equipment/add" class="btn btn-info">เพิ่มเคาน์เตอร์</a>
-                            <a href class="btn btn-danger">ยกเลิกเคาน์เตอร์</a>  
+                            <a href ng-click="goPage('add',{})" class="btn btn-info" ng-hide="model.officeId == null">เพิ่มเคาน์เตอร์</a>
+                            <a href class="btn btn-danger" ng-hide="model.counterId == null" confirm-click="deleteContractPoData()"  confirm="ยืนยันยกเลิกเคาน์เตอร์">ยกเลิกเคาน์เตอร์</a>
                         </div>
                     </div>
                 </div>

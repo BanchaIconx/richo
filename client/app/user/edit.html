@@ -9,10 +9,10 @@
                     <h3 class="panel-title">ข้อมูลผู้ใช้งาน</h3>
                 </div>
                 <div class="panel-body">
-                    <form name="submitForm" novalidate class="form-horizontal form-validation">
+                    <form name="submitForm" novalidate class="form-horizontal form-validation" ng-submit="save()">
                         <fieldset>
                             <div class="row form-group">
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <label for="">รหัสผู้ใช้งาน</label>
                                     <input type="text" class="form-control" required ng-model="model.userId" disabled>
                                 </div>
@@ -22,7 +22,13 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="">สาขาของ Ricoh</label>
-                                    <select name="" id="" class="form-control" required ng-model="model.branchId" ng-options="x.key as x.value for x in ddlBranches">
+                                    <select name="" id="" class="form-control" required ng-model="model.userBranches[0].ricohBranchId" ng-options="x.key as x.value for x in ddlBranches">
+                                        <option value="">กรุณาเลือก</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="">สิทธิ์ผู้ใช้งาน</label>
+                                    <select name="" id="" class="form-control" required ng-model="model.userRoles[0].roleId" ng-options="x.key as x.value for x in ddlRoless">
                                         <option value="">กรุณาเลือก</option>
                                     </select>
                                 </div>
@@ -30,8 +36,8 @@
                         </fieldset>
                         <div class="row">
                             <div class="col-sm-12">
-                                <button type="button" class="btn btn-info">บันทึกแก้ไขข้อมูล</button>
-                                <button type="button" class="btn btn-danger">ยกเลิกข้อมูลผู้ใช้</button>
+                                <button type="submit" class="btn btn-info">บันทึกแก้ไขข้อมูล</button>
+                                <button type="button" class="btn btn-danger" confirm-click="cancelUser()"  confirm="ยืนยันยกเลิกข้อมูลผู้ใช้">ยกเลิกข้อมูลผู้ใช้</button>
                             </div>
                         </div>
                     </form>

@@ -10,26 +10,28 @@
                     <h3 class="panel-title"> สัญญา : {{model.contractName}} > {{model.regionName}} > {{model.officeName}}</h3>
                 </div>
                 <div class="panel-body">
-                    <p>จำนวนทั้งหมด : {{model.total | number}} จำนวนที่ทำ PM แล้ว : {{model.success}} จำนวนคงเหลือ : {{model.remain}}</p>
-
+                    <p>จำนวนทั้งหมด : {{model.data.length | number}} จำนวนที่ทำ PM แล้ว : 0 จำนวนคงเหลือ : {{model.data.length | number}}</p>
+                    
                     <div class="table-responsive">
                         <table class="table table-striped table-hover table-condensed">
                             <thead>
                                 <th width="5%"></th>
                                 <th>เคาน์เตอร์</th>
-                                <th>จำนวนทั้งหมด</th>
-                                <th>จำนวนที่ทำ PM แล้ว</th>
-                                <th>จำนวนคงเหลือ</th>
+                                <th>สถานะ PM</th>
+                                <th>วันที่ทำ PM</th>
+                                <th>ช่างที่ทำ PM</th>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr ng-repeat="x in model.data">
                                     <td>
                                         <a href=""><i class="fa fa-search"></i></a>
                                     </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{x.wicketId}}</td>
+                                    <td>
+                                        <md-checkbox ng-model="x.chk" aria-label="primary" class="no-margin custom-disabled" ng-checked="false"> </md-checkbox>
+                                    </td>
+                                    <td>{{x.lastUpdateDateTime | date:'dd/MM/yyyy HH:mm'}}</td>
+                                    <td>{{x.lastUpdateUserId}}</td>
                                 </tr>
                             </tbody>
                         </table>

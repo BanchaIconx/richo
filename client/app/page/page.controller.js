@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('app.page')
-        .controller('authCtrl', ['$scope', '$rootScope', '$state', 'authenService', '$sessionStorage', authCtrl])
+        .controller('authCtrl', ['$scope', '$rootScope', '$state', 'userService', '$sessionStorage', authCtrl])
         .controller('menuCtrl', ['$scope', '$rootScope', '$sessionStorage', menuCtrl]);
 
-    function authCtrl($scope, $rootScope, $state, authenService, $sessionStorage) {
+    function authCtrl($scope, $rootScope, $state, userService, $sessionStorage) {
         //varialble
         $scope.error = {
             isError: false,
@@ -25,17 +25,16 @@
             
             //if not null
             if (!!$scope.model.userId && !!$scope.model.password) {
-                authenService.login($scope.model, function (response) {
+                userService.login($scope.model, function (response) {
                     $sessionStorage.user = response.data;
                     // console.log($sessionStorage.user);
                     //set up menu
-                    // $rootScope.menuGroup = $sessionStorage.user.role.allowMenuFunctions[0].menuFunctions;
+                    $rootScope.menuGroup = $sessionStorage.user.role.allowMenuFunctions[0].menuFunctions;
                     $rootScope.userRole = $sessionStorage.user.roleId;
-                    console.log($sessionStorage.user);
                     //go to default page
                     if($rootScope.userRole == 1){
                         // สาขา
-                        $state.go('pm/branch/all');
+                        $state.go('pm/add');
                     }else{
                         //สำนักงานใหญ่
                         $state.go('pm/contract/all');
@@ -54,7 +53,8 @@
 
     function menuCtrl($scope, $rootScope, $sessionStorage){
         if($sessionStorage.user != undefined){
-            $rootScope.userRole = $sessionStorage.user.roleId;
+            // $rootScope.userRole = $sessionStorage.user.roleId;
+            $rootScope.menuGroup = $sessionStorage.user.role.allowMenuFunctions[0].menuFunctions;
         }
     }
 

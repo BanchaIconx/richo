@@ -1,8 +1,8 @@
-(function() {
+(function () {
     'use strict';
 
     angular.module('app.core')
-        .factory('appConfig', ['$sessionStorage' ,appConfig])
+        .factory('appConfig', ['$sessionStorage', appConfig])
         .config(['$mdThemingProvider', mdConfig]);
 
     function appConfig($sessionStorage) {
@@ -23,11 +23,10 @@
         ];
         var date = new Date();
         var year = date.getFullYear();
-        var _user = $sessionStorage.user.userName;
         var main = {
             brand: 'Preventive Maintenance System',
             brandShort: 'RICOH',
-            name: _user.userName + '( ' + _user.branch.ricohBranchName + ' ) ' ,
+            name: "Admin Admin",
             year: year,
             layout: 'wide',                                 // 'boxed', 'wide'
             menu: 'vertical',                               // 'horizontal', 'vertical'
@@ -38,14 +37,14 @@
             skin: '31'                                      // 11,12,13,14,15,16; 21,22,23,24,25,26; 31,32,33,34,35,36
         };
         var color = {
-            primary:    '#009688',
-            success:    '#8BC34A',
-            info:       '#00BCD4',
-            infoAlt:    '#7E57C2',
-            warning:    '#FFCA28',
-            danger:     '#F44336',
-            text:       '#3D4051',
-            gray:       '#EDF0F1'
+            primary: '#009688',
+            success: '#8BC34A',
+            info: '#00BCD4',
+            infoAlt: '#7E57C2',
+            warning: '#FFCA28',
+            danger: '#F44336',
+            text: '#3D4051',
+            gray: '#EDF0F1'
         };
         var apiUrl = 'http://localhost:55969';
 
@@ -65,7 +64,7 @@
         var lightGreenAlt = $mdThemingProvider.extendPalette('light-green', {
             'contrastLightColors': '500 600 700 800 900',
             'contrastStrongLightColors': '500 600 700 800 900'
-        })        
+        })
 
         $mdThemingProvider
             .definePalette('cyanAlt', cyanAlt)

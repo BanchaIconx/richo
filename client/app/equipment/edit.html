@@ -7,40 +7,42 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">สัญญา : {{title.t1}} > เขตไปรษณีย์ : {{title.t2}} > ที่ทำการไปรษณีย์ : {{title.t3}}</h3>
+                    <h3 class="panel-title">สัญญา : {{title.t1.value}} > เขตไปรษณีย์ : {{title.t2.value}} > ที่ทำการไปรษณีย์ : {{title.t3.value}}</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            <dd>เคาน์เตอร์ : </dd>
+                            <dd>เคาน์เตอร์ : {{title.t4.value}}</dd>
                         </div>
                         <div class="col-sm-12">
-                            <dd>อปกรณ์รายการที่ : </dd>
+                            <dd>อปกรณ์รายการที่ : {{model.itemNo}}</dd>
                         </div>
                         <div class="col-sm-12">
-                            <dd>ชื่อรายการ : </dd>
+                            <dd>ชื่อรายการ : {{model.itemName}}</dd>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <div class="col-sm-4">
-                            <label for="">Brand</label>
-                            <input type="text" class="form-control">
+                    <form name="submitForm" novalidate class="form-validation" ng-submit=" submitForm.$valid && save()">
+                        <div class="row form-group">
+                            <div class="col-sm-4">
+                                <label for="">Brand</label>
+                                <input type="text" class="form-control" ng-model="model.brand" required>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="">Model</label>
+                                <input type="text" class="form-control" ng-model="model.model" required>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="">Serial No.</label>
+                                <input type="text" class="form-control" ng-model="model.serial" required>
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                            <label for="">Model</label>
-                            <input type="text" class="form-control">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-info">บันทึกข้อมูล</button>
+                                <a onclick="window.history.back()" class="btn btn-default btn-w-xs" style="margin-left:10px;">ยกเลิก</a>
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                            <label for="">Serial No.</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-info">บันทึกข้อมูล</button>
-                            <a onclick="window.history.back()" class="btn btn-default btn-w-xs" style="margin-left:10px;">ยกเลิก</a>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -67,15 +67,15 @@
                 templateUrl: 'app/pmByContract/all.html'
             });
             $stateProvider.state('pm/contract/byContract',{
-                url: '/pm/contract/all/:contractId',
+                url: '/pm/contract/byContract/:contractId/:contractName',
                 templateUrl: 'app/pmByContract/byContract.html'
             });
             $stateProvider.state('pm/contract/byContractAndRegion',{
-                url: '/pm/contract/all/:contractId/:regionId',
+                url: '/pm/contract/byContractAndRegion/:regionId/:contractName/:regionName',
                 templateUrl: 'app/pmByContract/byContractAndRegion.html'
             });
             $stateProvider.state('pm/contract/byContractAndRegionAndOffice',{
-                url: '/pm/contract/all/:contractId/:regionId/:officeId',
+                url: '/pm/contract/byContractAndRegionAndOffice/:officeId/:contractName/:regionName/:officeName',
                 templateUrl: 'app/pmByContract/byContractAndRegionAndOffice.html'
             });
 
@@ -85,15 +85,15 @@
                 templateUrl: 'app/pmByBranch/all.html'
             });
             $stateProvider.state('pm/branch/byBranch',{
-                url: '/pm/branch/all/:branchId',
+                url: '/pm/branch/byBranch/:branchId/:branchName',
                 templateUrl: 'app/pmByBranch/byBranch.html'
             });
             $stateProvider.state('pm/branch/byBranchAndRegion',{
-                url: '/pm/branch/all/:branchId/:regionId',
+                url: '/pm/branch/byBranchAndRegion/:regionId/:branchName/:regionName',
                 templateUrl: 'app/pmByBranch/byBranchAndRegion.html'
             });
             $stateProvider.state('pm/branch/byBranchAndRegionAndOffice',{
-                url: '/pm/branch/all/:branchId/:regionId/:officeId',
+                url: '/pm/branch/byBranchAndRegionAndOffice/:officeId/:branchName/:regionName/:officeName',
                 templateUrl: 'app/pmByBranch/byBranchAndRegionAndOffice.html'
             });
         }]

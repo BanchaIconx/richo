@@ -41,9 +41,9 @@
             $document.scrollTo(0, 0);
         });
     }
-})(); 
+})();
 
-(function (){
+(function () {
     'user stict';
 
     angular.module('app').run(function ($rootScope, $location, $state, $sessionStorage) {
@@ -57,5 +57,8 @@
                 $location.path('/signin');
             }
         });
+        $rootScope.getUserId = function () {
+            return $sessionStorage.user == undefined ? "" : $sessionStorage.user.userName;
+        }
     });
 })();

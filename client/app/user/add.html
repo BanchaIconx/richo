@@ -12,7 +12,7 @@
                     <form name="submitForm" novalidate class="form-horizontal form-validation" ng-submit="add()">
                         <fieldset>
                             <div class="row form-group">
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <label for="">รหัสผู้ใช้งาน</label>
                                     <input type="text" class="form-control" required ng-model="model.userId">
                                 </div>
@@ -23,16 +23,24 @@
                                 <div class="col-sm-3">
                                     <label for="">สาขาของ Ricoh</label>
                                     <select name="" id="" class="form-control" required ng-model="branchId" ng-options="x.key as x.value for x in ddlBranches">
-                                    <option value="">กรุณาเลือก</option>
-                                </select>
+                                        <option value="">กรุณาเลือก</option>
+                                    </select>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
+                                    <label for="">สิทธิ์ผู้ใช้งาน</label>
+                                    <select name="" id="" class="form-control" required ng-model="roleId" ng-options="x.key as x.value for x in ddlRoless">
+                                        <option value="">กรุณาเลือก</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-3">
                                     <label for="">รหัสผ่าน</label>
-                                    <input name="password" type="password" class="form-control" required ng-model="model.password">
+                                    <input type="password" class="form-control" required ng-model="model.password">
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <label for="">รหัสผ่าน (อีกครั้ง)</label>
-                                    <input type="password" class="form-control" required ng-model="confirmPassword" ng-match="password">
+                                    <input type="password" class="form-control" required ng-model="model.confirmPassword">
                                 </div>
                             </div>
                         </fieldset>
