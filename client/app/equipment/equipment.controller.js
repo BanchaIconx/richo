@@ -134,7 +134,7 @@
         }
     }
 
-    function addEquipmentCtrl($scope, dropdownlistService, $sessionStorage, templateService, contractService) {
+    function addEquipmentCtrl($scope, dropdownlistService, $sessionStorage, templateService, contractService, alertModalFactory) {
         //variable
         $scope.title = {};
         $scope.model = {};
