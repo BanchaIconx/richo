@@ -16,23 +16,23 @@
                         </div>
                     </div>
                     <div class="row" ng-show="action == 'edit'">
-                            <div class="col-sm-4">
-                                <label for="">ชื่อผู้รับบริการ</label>
-                                <input type="text" class="form-control" ng-model="model.poOfficerName" >
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="">เบอร์โทร</label>
-                                <input type="text" class="form-control" ng-model="model.poOfficerPhoneNo" >
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="">ชื่อช่าง</label>
-                                <input type="text" class="form-control" ng-model="model.pmEngineerName" >
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="">เลขที่ใบงาน</label>
-                                <input type="text" class="form-control" ng-model="model.jobNo" >
-                            </div>
+                        <div class="col-sm-4">
+                            <label for="">ชื่อผู้รับบริการ</label>
+                            <input type="text" class="form-control" ng-model="model.poOfficerName">
                         </div>
+                        <div class="col-sm-2">
+                            <label for="">เบอร์โทร</label>
+                            <input type="text" class="form-control" ng-model="model.poOfficerPhoneNo">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="">ชื่อช่าง</label>
+                            <input type="text" class="form-control" ng-model="model.pmEngineerName">
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="">เลขที่ใบงาน</label>
+                            <input type="text" class="form-control" ng-model="model.jobNo">
+                        </div>
+                    </div>
                     <div ng-repeat="x in model.pmDataItems">
                         <div class="row">
                             <div class="col-sm-12">
@@ -78,7 +78,7 @@
                                                     <td>{{y.checklistItem}}</td>
                                                     <td>{{y.equipmentChecklist.itemDescription}}</td>
                                                     <td>
-                                                        <md-checkbox ng-model="y.phiscialCheck" aria-label="primary" class="no-margin"> 
+                                                        <md-checkbox ng-model="y.phiscialCheck" aria-label="primary" class="no-margin">
                                                             {{y.equipmentChecklist.phsicalCheckDescription}}</md-checkbox>
                                                     </td>
                                                     <td>
@@ -110,12 +110,30 @@
                             <hr style="margin: 10px 0;background-color: #000;">
                         </div>
                     </div>
-                    <div class="row" ng-show="action == 'edit'">
+                    <div ng-show="action == 'edit'">
+                        <div class="row form-group" ng-show="model.signatureImageUrl != null && model.signatureImageUrl != ''">
                             <div class="col-sm-12">
-                                <label for="">ลายเซ็น</label>
-                                <textarea name="" id="" class="form-control" cols="30" rows="5"></textarea>
+                                <div>
+                                    <label for="">ลายเซ็น </label>
+                                    <button class="btn btn-danger" type="button" ng-click="model.signatureImageUrl = null">แก้ไขลายเซ็น</button>
+                                </div>
+                                <img src="{{model.signatureImageUrl}}" alt="">
                             </div>
                         </div>
+
+                        <div class="row form-group" ng-show="model.signatureImageUrl == null || model.signatureImageUrl == ''">
+                            <div class="col-sm-12">
+                                <div>
+                                    <label for="">ลายเซ็น </label>
+                                    <button class="btn btn-danger" type="button" ng-click="clearSignature()">Clear</button>
+                                </div>
+                                <div class="wrapper">
+
+                                    <canvas style="border:1px solid;" id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <button class="btn btn-info" ng-click="save()">บันทึกข้อมูล</button>
                     <label class="btn btn-success" for="upload"><i class="fa fa-cloud-upload"></i> แบปรูปภาพ</label>
                     <button class="btn btn-default" onclick="window.history.back()">ยกเลิก</button>

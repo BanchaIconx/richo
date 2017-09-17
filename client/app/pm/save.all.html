@@ -65,10 +65,26 @@
                             </table>
                         </div>
 
-                        <div class="row form-group">
+                        <div class="row form-group" ng-show="model[0].signatureImageUrl != null && model[0].signatureImageUrl != ''">
                             <div class="col-sm-12">
-                                <label for="">ลายเซ็น</label>
-                                <textarea class="form-control" rows="5"></textarea>
+                                <div>
+                                    <label for="">ลายเซ็น</label>
+                                    <button class="btn btn-danger" type="button" ng-click="model[0].signatureImageUrl = null">แก้ไขลายเซ็น</button>
+                                </div>
+                                <img src="{{model[0].signatureImageUrl}}" alt="">
+                            </div>
+                        </div>
+
+                        <div class="row form-group" ng-show="model[0].signatureImageUrl == null || model[0].signatureImageUrl == ''">
+                            <div class="col-sm-12">
+                                <div>
+                                    <label for="">ลายเซ็น</label>
+                                    <button class="btn btn-danger" type="button" ng-click="clearSignature()">Clear</button>
+                                </div>
+                                <div class="wrapper">
+
+                                    <canvas style="border:1px solid;" id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+                                </div>
                             </div>
                         </div>
 

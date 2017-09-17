@@ -2,18 +2,18 @@
     'use strict';
 
     angular.module('app.pm')
-        .controller('managePMCtrl', ['$scope' ,'contractService' ,'setupFactory' ,'dropdownlistService' ,'$sessionStorage', managePMCtrl])
+        .controller('managePMCtrl', ['$scope', 'contractService', 'setupFactory', 'dropdownlistService', '$sessionStorage', managePMCtrl])
         .controller('addPMCtrl', ['$scope', 'dropdownlistService', '$sessionStorage', 'contractService', '$filter', '$state', addPMCtrl])
         .controller('saveAllPMCtrl', ['$scope', '$sessionStorage', 'contractService', 'alertModalFactory', '$state', saveAllPMCtrl])
         .controller('saveItemPMCtrl', ['$scope', '$sessionStorage', 'contractService', 'alertModalFactory', '$stateParams', saveItemPMCtrl])
-        .controller('viewPMCtrl', ['$scope' ,'$stateParams' ,'contractService' ,'alertModalFactory', viewPMCtrl]);
+        .controller('viewPMCtrl', ['$scope', '$stateParams', 'contractService', 'alertModalFactory', viewPMCtrl]);
 
     function managePMCtrl($scope, contractService, setupFactory, dropdownlistService, $sessionStorage) {
         //variable
         $scope.model = {
             pageIndex: 1,
             poId: null,
-            jobNo:"",
+            jobNo: "",
             fromDate: new Date(),
             toDate: new Date()
         };
@@ -25,7 +25,7 @@
 
         //initial
         setupFactory.initialDatePicker($scope);
-        dropdownlistService.getDdlPoByBranch($sessionStorage.user.branchId, function(response){
+        dropdownlistService.getDdlPoByBranch($sessionStorage.user.branchId, function (response) {
             $scope.ddlPo = response.data;
         })
 
@@ -34,13 +34,13 @@
             $scope.model = $sessionStorage.search.model;
         }
 
-        function search(){
+        function search() {
             $scope.model.toDate = $scope.model.fromDate;
             $sessionStorage.search = {
                 page: 'pm/manage',
                 model: $scope.model
             };
-            contractService.postSearchPmData($scope.model, function(response){
+            contractService.postSearchPmData($scope.model, function (response) {
                 $scope.data = response.data;
             });
         }
@@ -106,6 +106,7 @@
 
         //function
         $scope.save = save;
+        $scope.clearSignature = clearSignature;
 
         //initial
         $scope.office = $sessionStorage.search.model;
@@ -118,6 +119,15 @@
             $scope.saveData.poOfficerPhoneNo = response.data[0].poOfficerPhoneNo;
             $scope.saveData.jobNo = response.data[0].jobNo;
         });
+
+        var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'rgb(0, 0, 0)'
+        });
+
+        function clearSignature() {
+            signaturePad.clear();
+        }
 
         function save() {
             //set dirty all input
@@ -132,6 +142,9 @@
             $scope.model.forEach(function (elm) {
                 $scope.saveData.pmDataIdList.push(elm.pmDataId);
             }, this);
+            if ($scope.model[0].signatureImageUrl == "" || $scope.model[0].signatureImageUrl == null) {
+                $scope.saveData.signatureBase64 = signaturePad.toDataURL('image/png');
+            }
 
             contractService.postUpdateListPmData($scope.saveData, function (response) {
                 alertModalFactory.success("บันทึกข้อมูลเรียบร้อย", function () {
@@ -160,6 +173,15 @@
                 elm.imageBase64 = elm.imageUrl
             }, this);
         })
+
+        var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'rgb(0, 0, 0)'
+        });
+
+        function clearSignature() {
+            signaturePad.clear();
+        }
 
         function uploadImage(files) {
             var file = files[0];
@@ -190,6 +212,15 @@
         function save() {
             $scope.model.pmStatusId = 2;
             $scope.model.lastUpdateUserId = $sessionStorage.user.userId
+
+            if($scope.model.signatureImageUrl == null || $scope.model.signatureImageUrl == ""){
+                $scope.model.signatureBase64 = signaturePad.toDataURL('image/png');
+            }
+            $scope.model.images.forEach(function(elm){
+                if(elm.imageId > 0){
+                    elm.imageBase64 = "";
+                }
+            },this);
             contractService.postUpdatePmData($scope.model, function (response) {
                 alertModalFactory.success("บันทึกข้อมูลเรียบร้อย", function () {
                     window.history.back();
@@ -198,7 +229,7 @@
         }
     }
 
-    function viewPMCtrl($scope, $stateParams, contractService, alertModalFactory){
+    function viewPMCtrl($scope, $stateParams, contractService, alertModalFactory) {
         //variable
         $scope.action = "";
 
@@ -211,9 +242,9 @@
             $scope.model = response.data;
         });
 
-        function changeStatus(){
-            contractService.getChangePmDataStatus($scope.model.pmDataId, function(response){
-                alertModalFactory.success("ยกเลิกข้อมูลเรียบร้อย", function(){
+        function changeStatus() {
+            contractService.getChangePmDataStatus($scope.model.pmDataId, function (response) {
+                alertModalFactory.success("ยกเลิกข้อมูลเรียบร้อย", function () {
                     window.history.back();
                 })
             })
