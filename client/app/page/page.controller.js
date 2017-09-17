@@ -3,7 +3,8 @@
 
     angular.module('app.page')
         .controller('authCtrl', ['$scope', '$rootScope', '$state', 'userService', '$sessionStorage', authCtrl])
-        .controller('menuCtrl', ['$scope', '$rootScope', '$sessionStorage', menuCtrl]);
+        .controller('menuCtrl', ['$scope', '$rootScope', '$sessionStorage', menuCtrl])
+        .controller('page404Ctrl', ['$scope', '$sessionStorage', page404Ctrl]);
 
     function authCtrl($scope, $rootScope, $state, userService, $sessionStorage) {
         //varialble
@@ -22,7 +23,7 @@
 
         function signin() {
             $rootScope.menuGroup = undefined;
-            
+
             //if not null
             if (!!$scope.model.userId && !!$scope.model.password) {
                 userService.login($scope.model, function (response) {
@@ -32,10 +33,10 @@
                     $rootScope.menuGroup = $sessionStorage.user.role.allowMenuFunctions[0].menuFunctions;
                     $rootScope.userRole = $sessionStorage.user.roleId;
                     //go to default page
-                    if($rootScope.userRole == 1){
+                    if ($rootScope.userRole == 1) {
                         // สาขา
                         $state.go('pm/add');
-                    }else{
+                    } else {
                         //สำนักงานใหญ่
                         $state.go('pm/contract/all');
                     }
@@ -51,13 +52,27 @@
         }
     }
 
-    function menuCtrl($scope, $rootScope, $sessionStorage){
-        if($sessionStorage.user != undefined){
+    function menuCtrl($scope, $rootScope, $sessionStorage) {
+        if ($sessionStorage.user != undefined) {
             // $rootScope.userRole = $sessionStorage.user.roleId;
             $rootScope.menuGroup = $sessionStorage.user.role.allowMenuFunctions[0].menuFunctions;
         }
     }
 
+    function page404Ctrl($scope, $sessionStorage) {
+        //variable
+        $scope.backUrl = "";
+
+        //initial
+        console.log($sessionStorage.user);
+        if($sessionStorage.user.roleId == 1){
+            //สาขา
+            $scope.backUrl = "#/pm/add";
+        }else{
+            //สำนักงานใหญ่
+            $scope.backUrl = "#/pm/contract/all";
+        }
+    }
 })();
 
 

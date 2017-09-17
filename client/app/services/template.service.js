@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app')
-        .service('templateService', ['$http', 'CommonCallback', 'setupFactory', commonService]);
+        .service('templateService', ['$http', 'CommonCallback', 'setupFactory', templateService]);
 
-    function commonService($http, CommonCallback, setupFactory) {
+    function templateService($http, CommonCallback, setupFactory) {
         var http = {
             'getTemplateInfo': function (data) {
                 return setupFactory.serviceGet('/template/getTemplateInfo/', data);

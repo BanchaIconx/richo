@@ -1,0 +1,83 @@
+<div class="page" ng-controller="saveAllPMCtrl">
+
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2><button back-button></button> สร้างใบงานใหม่</h2>
+        </div>
+
+        <form name="submitForm" class="form-validation" novalidate ng-submit="save()">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">ที่ทำการไปษณีย์ : {{office.officeName}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="">ชื่อผู้รับบริการ</label>
+                                <input type="text" class="form-control" placeholder="ชื่อ นามสกุล" ng-model="saveData.poOfficerName" required>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="">เบอร์โทร</label>
+                                <input type="text" class="form-control" placeholder="02-999-9999" ng-model="saveData.poOfficerPhoneNo" required>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="">ชื่อช่าง</label>
+                                <input type="text" class="form-control" placeholder="ชื่อ นามสกุล" ng-model="saveData.pmEngineerName" required>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="">เลขที่ใบงาน</label>
+                                <input type="text" class="form-control" ng-model="saveData.jobNo" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">รายการเคาน์เตอร์ตามสัญญา</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">#</th>
+                                        <th>ชื่อสัญญา</th>
+                                        <th>WicketID</th>
+                                        <th>สถานะ PM</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="x in model">
+                                    <tr>
+                                        <td>
+                                            <a href="#/pm/add/all/items/{{x.pmDataId}}/add"><i class="fa fa-pencil"></i></a>
+                                        </td>
+                                        <td>{{x.contractPoList.contract.contractName}}</td>
+                                        <td>{{x.wicketId}}</td>
+                                        <td>
+                                            <md-checkbox ng-checked="x.pmStatusId == 2" aria-label="primary" class="no-margin custom-disabled"> </md-checkbox>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label for="">ลายเซ็น</label>
+                                <textarea class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-info" type="submit" ng-show="model.length > 0">บันทึกใบงาน</button>
+
+                        <button class="btn btn-default" ng-show="model.length > 0">ยกเลิกรายการ</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

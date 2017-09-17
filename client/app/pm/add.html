@@ -7,9 +7,43 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">title</h3>
+                    <h3 class="panel-title">กรุณาเลือกที่ทำการไปรษณีย์</h3>
                 </div>
                 <div class="panel-body">
+                    <label for="">รหัส/ชื่อที่ทำการไปรษณีย์</label>
+                    <select name="" id="" class="form-control" ng-model="poId" ng-options="x.key as x.value for x in ddlOffice" ng-change="onDdlBranchChange(poId)">
+                        <option value="">กรุณาเลือก</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">รายการสัญญาสำหรับไปรษณีย์ที่เลือก</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-condensed">
+                            <thead>
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th>ชื่อสัญญา</th>
+                                    <th>จำนวนเคาน์เตอร์</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in model">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{x.contract.contractName}}</td>
+                                    <td>{{x.noOfCounter | number}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- <a href="#/pm/add/all/{{poId}}" class="btn btn-info" ng-show="model.length > 0">สร้างใบงาน</a> -->
+                    <a ng-click="CreateListPmDataByPoId(poId)" class="btn btn-info" ng-show="model.length > 0">สร้างใบงาน</a>
                 </div>
             </div>
         </div>

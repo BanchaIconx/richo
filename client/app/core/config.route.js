@@ -5,14 +5,14 @@
         .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
          
             $urlRouterProvider
-                .when('/', 'pm/contract/all')
-                .otherwise('pm/contract/all');
+                .when('/', 'page/404')
+                .otherwise('page/404');
 
 
-            // $stateProvider.state('dashboard', {
-            //     url: '/dashboard',
-            //     templateUrl: 'app/dashboard/dashboard.html'
-            // });
+            $stateProvider.state('page/404', {
+                url: '/page/404',
+                templateUrl: 'app/page/404.html'
+            });
 
             $stateProvider.state('signin', {
                 url: '/signin',
@@ -59,6 +59,22 @@
             $stateProvider.state('pm/add',{
                 url: '/pm/add',
                 templateUrl: 'app/pm/add.html'
+            });
+            $stateProvider.state('pm/add/all',{
+                url: '/pm/add/all/:officeId',
+                templateUrl: 'app/pm/save.all.html'
+            });
+            $stateProvider.state('pm/add/all/item',{
+                url: '/pm/add/all/items/:pmDataId/:action',
+                templateUrl: 'app/pm/save.all.items.html'
+            });
+            $stateProvider.state('pm/detail',{
+                url: '/pm/detail/:pmDataId/:action',
+                templateUrl: 'app/pm/view.html'
+            });
+            $stateProvider.state('pm/search',{
+                url: '/pm/search',
+                templateUrl: 'app/pm/search.html'
             });
 
             //pm by contract

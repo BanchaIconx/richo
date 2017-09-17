@@ -20,6 +20,7 @@
         $scope.ddlRegions = [];
         $scope.ddlOffices = [];
         $scope.ddlCounter = [];
+        $scope.contractPoListId = 0;
 
         //function
         $scope.getDdlContract = getDdlContract; //สัญญา
@@ -47,10 +48,12 @@
                     $scope.ddlRegions = response.data;
                     dropdownlistService.getDdlPo($scope.model.regionId, function (response) {
                         $scope.ddlOffices = response.data;
-                        dropdownlistService.getDdlWicked($scope.model.contractId, $scope.model.officeId, function (response) {
-                            $scope.ddlCounter = response.data;
-                            search();
-                        });
+                        if($scope.model.officeId!=null){
+                            dropdownlistService.getDdlWicked($scope.model.contractId, $scope.model.officeId, function (response) {
+                                $scope.ddlCounter = response.data;
+                                search();
+                            });
+                        }
                     });
                 });
             }
@@ -81,6 +84,9 @@
             dropdownlistService.getDdlWicked($scope.model.contractId, $scope.model.officeId, function (response) {
                 $scope.ddlCounter = response.data;
             });
+            contractService.GetContractPoListIdByContractIdAndPoId($scope.model.contractId, $scope.model.officeId, function (response) {
+                $scope.contractPoListId = response.data;
+            })
         }
 
         function search() {
@@ -110,7 +116,8 @@
                     t1: _contract,
                     t2: _region,
                     t3: _office,
-                    t4: _counter
+                    t4: _counter,
+                    contractPoListId: $scope.contractPoListId
                 },
                 data: value
             };
@@ -125,9 +132,9 @@
 
         }
 
-        function deleteContractPoData(){
-            contractService.deleteContractPoData($scope.model.data.contractPoDataId, function(response){
-                alertModalFactory.success("ลบข้อมูลเรียบร้อย", function(response){
+        function deleteContractPoData() {
+            contractService.deleteContractPoData($scope.model.data.contractPoDataId, function (response) {
+                alertModalFactory.success("ลบข้อมูลเรียบร้อย", function (response) {
                     getDdlWicked();
                 })
             })
@@ -150,7 +157,7 @@
         $scope.model = {
             "contractPoDataId": 0,
             "templateId": null,
-            "contractPoListId": $scope.title.t4.key,
+            "contractPoListId": $scope.title.contractPoListId,
             "wicketId": "",
             "version": 1,
             "lastUpdateUserId": $sessionStorage.user.userId,
@@ -167,7 +174,6 @@
             $scope.templateItems = [];
             if (id == null) return;
             templateService.getTemplateInfo(id, function (response) {
-                console.log(response);
                 $scope.templateItems = response.data.equipmentTemplates;
             })
         }
@@ -190,6 +196,11 @@
                     "brand": elm.brand,
                     "model": elm.model,
                     "serial": elm.serial,
+                    "ip": "",
+                    "brandModel": elm.brandModel,
+                    "ipNo": elm.ip,
+                    "serialNo": elm.serialNo,
+                    "equipmentTypeId": elm.equipmentTypeId,
                     "version": 1,
                     "lastUpdateUserId": $sessionStorage.user.userId,
                     "lastUpdateDateTime": new Date()

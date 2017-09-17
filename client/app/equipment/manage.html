@@ -74,7 +74,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href ng-click="goPage('add',{})" class="btn btn-info" ng-hide="model.officeId == null">เพิ่มเคาน์เตอร์</a>
+                            <a href ng-click="goPage('add',{})" class="btn btn-info" ng-hide="(model.officeId == null && contractPoListId == 0)">เพิ่มเคาน์เตอร์</a>
                             <a href class="btn btn-danger" ng-hide="model.counterId == null" confirm-click="deleteContractPoData()"  confirm="ยืนยันยกเลิกเคาน์เตอร์">ยกเลิกเคาน์เตอร์</a>
                         </div>
                     </div>

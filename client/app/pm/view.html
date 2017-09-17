@@ -1,0 +1,125 @@
+<div class="page" ng-controller="viewPMCtrl">
+
+    <div class="row ui-section">
+        <div class="col-lg-8 clearfix">
+            <h2><button back-button></button> ข้อมูลใบงาน</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">ที่ทำการไปษณีย์ : {{model.contractPoList.po.poNumber + " - " + model.contractPoList.po.poName}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row form-group">
+                        <div class="col-sm-12">
+                            สัญญา: {{model.contractPoList.contract.contractName}} - Wicket ID : {{model.wicketId}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="">ชื่อผู้รับบริการ</label>
+                            <input type="text" class="form-control" ng-model="model.poOfficerName" disabled>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="">เบอร์โทร</label>
+                            <input type="text" class="form-control" ng-model="model.poOfficerPhoneNo" disabled>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="">ชื่อช่าง</label>
+                            <input type="text" class="form-control" ng-model="model.pmEngineerName" disabled>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="">เลขที่ใบงาน</label>
+                            <input type="text" class="form-control" ng-model="model.jobNo" disabled>
+                        </div>
+                    </div>
+                    <div ng-repeat="x in model.pmDataItems">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <hr style="margin: 10px 0;border-top: 1px solid rgb(193, 188, 188);">
+                            </div>
+                            <div class="col-sm-12">
+                                <h5 style="background-color: rgb(0, 150, 136);padding: 10px;margin: 0;color:#fff;" ng-click="x.open = !x.open" ng-init="x.open = false">ส่วนที่ {{x.itemNo}} : {{x.itemName}} <span class="fa fa-{{x.open?'plus':'minus'}} pull-right"></span></h5>
+                            </div>
+                        </div>
+                        <div uib-collapse="x.open">
+                            <div class="row">
+                                <div class="col-sm-3" ng-show="x.brandModel">
+                                    <label for="">Brand</label>
+                                    <dd>{{x.brand}}</dd>
+                                </div>
+                                <div class="col-sm-3" ng-show="x.brandModel">
+                                    <label for="">Model</label>
+                                    <dd>{{x.model}}</dd>
+                                </div>
+                                <div class="col-sm-3" ng-show="x.ipNo">
+                                    <label for="">IP</label>
+                                    <dd>{{x.x.ipAddress}}</dd>
+                                </div>
+                                <div class="col-sm-3" ng-show="x.serialNo">
+                                    <label for="">Serial No.</label>
+                                    <dd>{{x.x.enteredSerial}}</dd>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="">
+                                        <table class="table table-striped table-hover table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th width="5%">Item</th>
+                                                    <th width="30%">Description</th>
+                                                    <th width="35%">Physical Check</th>
+                                                    <th width="30%">Remark</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="y in x.pmDataChecklists">
+                                                <tr>
+                                                    <td>{{y.checklistItem}}</td>
+                                                    <td>{{y.equipmentChecklist.itemDescription}}</td>
+                                                    <td>
+                                                        <md-checkbox ng-checked="y.phiscialCheck" aria-label="primary" class="no-margin custom-disabled">
+                                                            {{y.equipmentChecklist.phsicalCheckDescription}}</md-checkbox>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" ng-model="y.remark" disabled>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="">ไฟล์รูปภาพ</label>
+                            <hr style="margin: 10px 0;background-color: #000;">
+                            <input id="upload" style="display:none;" class="form-control" type="file" accept="image/*" capture="camera" ng-model="image"
+                                onchange="angular.element(this).scope().uploadImage(this.files)">
+                            <div class="row form-group" ng-repeat="im in model.images">
+                                <div class="col-xs-10">
+                                    <!-- <img ng-src="{{(im.imageUrl != "" || im.imageUrl != null) ? im.imageUrl : im.imageBase64}}" alt="" style="max-width:150px;height:auto;"> -->
+                                    <img ng-src="{{im.imageUrl}}" alt="" style="max-width:150px;height:auto;">
+                                </div>
+                                <div class="col-xs-2">
+                                    <a class="btn btn-danger" ng-click="removeImage($index)">ลบรูป</a>
+                                </div>
+                            </div>
+                            <hr style="margin: 10px 0;background-color: #000;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="">ลายเซ็น</label>
+                            <img ng-src="{{model.signatureImageUrl}}" alt="" style="max-width:300px;height:auto;">
+                        </div>
+                    </div>
+                    <button class="btn btn-info" ng-show="model.pmStatusId == 2 && action == 'view'" confirm-click="changeStatus()" confirm="ยืนยันยกเลิกข้อมูล">ยกเลิกข้อมูลข้อมูล</button>
+                    <button class="btn btn-default" onclick="window.history.back()">ย้อนกลับ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

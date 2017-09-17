@@ -14,18 +14,32 @@
                         <div class="row form-group">
                             <div class="col-sm-6">
                                 <label for="">รหัส/ชื่อที่ทำการไปรษณีย์</label>
-                                <select name="" id="" class="form-control">
-                                    <option value=""></option>
+                                <select name="" id="" class="form-control" ng-model="model.poId" ng-options="x.key as x.value for x in ddlPo">
+                                    <option value="">ทั้งหมด</option>
                                 </select>
                             </div>
                             <div class="col-sm-3">
                                 <label for="">เลขที่ใบงาน</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" ng-model="model.jobNo">
                             </div>
                             <div class="col-sm-3">
                                 <label for="">วันที่เข้าทำงาน</label>
-                                <input type="text" class="form-control">
+                                <div class="input-group ui-datepicker">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" is-open="popup1.opened" min-date="minDate" max-date="maxDate"
+                                        datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close"
+                                        alt-input-formats="altInputFormats" ng-model="model.fromDate" />
+                                    <span class="input-group-addon input-sm" ng-click="open1()"><i class="fa fa-calendar"></i></span>
+                                </div>
                             </div>
+                            <!-- <div class="col-sm-3">
+                                <label for="">ถึงวันที่</label>
+                                <div class="input-group ui-datepicker">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" is-open="popup2.opened" min-date="minDate" max-date="maxDate"
+                                        datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close"
+                                        alt-input-formats="altInputFormats" ng-model="model.toDate" />
+                                    <span class="input-group-addon input-sm" ng-click="open2()"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div> -->
                         </div>
                         <button type="submit" class="btn btn-info">ค้นหา</button>
                     </form>
@@ -46,16 +60,20 @@
                                 <th>วันที่เข้าทำงาน</th>
                                 <th>สัญญา</th>
                                 <th>Wicket</th>
+                                <th>สถานะ</th>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr ng-repeat="x in data.pmDatas">
                                     <td>
-                                        <a href=""><i class="fa fa-search"></i></a>
+                                        <a href="#/pm/detail/{{x.pmDataId}}/view"><i class="fa fa-search"></i></a>
                                     </td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
+                                    <td>{{x.jobNo}}</td>
+                                    <td>{{x.pmDate | date:'dd/MM/yyyy'}}</td>
+                                    <td>{{x.contractPoList.contract.contractName}}</td>
+                                    <td>{{x.wicketId}}</td>
+                                    <td>
+                                        <md-checkbox ng-checked="x.pmStatusId == 2" aria-label="primary" class="no-margin custom-disabled"> </md-checkbox>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

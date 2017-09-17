@@ -4,7 +4,7 @@
     angular.module('app.user')
         .controller('manageUserCtrl', ['$scope', 'dropdownlistService', 'userService', manageUserCtrl])
         .controller('addUserCtrl', ['$scope', 'dropdownlistService', 'alertModalFactory', 'userService', '$sessionStorage', addUserCtrl])
-        .controller('editUserCtrl', ['$scope', 'dropdownlistService', '$stateParams', '$sessionStorage', 'userService' ,'alertModalFactory', editUserCtrl])
+        .controller('editUserCtrl', ['$scope', 'dropdownlistService', '$stateParams', '$sessionStorage', 'userService', 'alertModalFactory', editUserCtrl])
         .controller('changePasswordCtrl', ['$scope', '$sessionStorage', 'userService', 'alertModalFactory', changePasswordCtrl]);
 
     function manageUserCtrl($scope, dropdownlistService, userService) {
@@ -89,8 +89,8 @@
                 userId: $scope.model.userId,
                 ricohBranchId: $scope.branchId
             });
-            userService.postAddUser($scope.model, function (response){
-                alertModalFactory.success("เพิ่มผู้ใช้เรียบร้อย", function(){
+            userService.postAddUser($scope.model, function (response) {
+                alertModalFactory.success("เพิ่มผู้ใช้เรียบร้อย", function () {
                     window.history.back();
                 });
             })
@@ -113,25 +113,25 @@
         dropdownlistService.getDdlRoles(function (response) {
             $scope.ddlRoless = response.data;
         });
-        userService.getUserByUserId($stateParams.userId, function(response){
+        userService.getUserByUserId($stateParams.userId, function (response) {
             $scope.model = response.data;
             $scope.model.lastUpdateUserId = $sessionStorage.user.userId;
-        })
+        });
 
         function save() {
             //if field invalid return false
             if ($scope.submitForm.$invalid) return;
 
-            userService.postUpdateUser($scope.model, function (response){
-                alertModalFactory.success("บันทึกข้อมูลเรียบร้อย", function(){
+            userService.postUpdateUser($scope.model, function (response) {
+                alertModalFactory.success("บันทึกข้อมูลเรียบร้อย", function () {
                     window.history.back();
                 });
             })
         }
 
-        function cancelUser(){
-            userService.postCancelUser($scope.model, function (response){
-                alertModalFactory.success("ยกเลิกข้อมูลผู้ใช้เรียบร้อย", function(){
+        function cancelUser() {
+            userService.postCancelUser($scope.model, function (response) {
+                alertModalFactory.success("ยกเลิกข้อมูลผู้ใช้เรียบร้อย", function () {
                     window.history.back();
                 });
             })

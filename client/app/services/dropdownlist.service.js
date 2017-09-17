@@ -27,10 +27,10 @@
             'getDdlContractPoData': function (data) {
                 return setupFactory.serviceGet('/dropdownList/getDdlContractPoData/', data);
             },
-            'getDdlWicked': function(data, data2){
+            'getDdlWicked': function (data, data2) {
                 return setupFactory.serviceGet('/dropdownList/getDdlWicked/', data, data2);
             },
-            'getDdlTemplates': function(){
+            'getDdlTemplates': function () {
                 return setupFactory.serviceGet('/dropdownList/getDdlTemplates');
             }
         }
@@ -41,7 +41,7 @@
         }
 
         function getDdlRoles(successCallBack) {
-            $http(http.getDdlRoles)
+            $http(http.getDdlRoles())
                 .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
         }
 
@@ -69,15 +69,15 @@
             $http(http.getDdlContractPoData(data))
                 .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
         }
-        
+
         function getDdlWicked(data, data2, successCallBack) {
             $http(http.getDdlWicked(data, data2))
                 .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
         }
 
-        function getDdlTemplates(successCallBack){
+        function getDdlTemplates(successCallBack) {
             $http(http.getDdlTemplates())
-            .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
+                .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
         }
 
         return {
