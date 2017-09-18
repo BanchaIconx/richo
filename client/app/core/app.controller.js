@@ -46,7 +46,7 @@
 (function () {
     'user stict';
 
-    angular.module('app').run(function ($rootScope, $location, $state, $sessionStorage) {
+    angular.module('app').run(['$rootScope', '$location', '$state', '$sessionStorage', function ($rootScope, $location, $state, $sessionStorage) {
         $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
 
             if (toState.name == 'signin')
@@ -60,5 +60,5 @@
         $rootScope.getUserId = function () {
             return $sessionStorage.user == undefined ? "" : $sessionStorage.user.userName;
         }
-    });
+    }]);
 })();
