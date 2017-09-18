@@ -29,7 +29,8 @@ module.exports = function() {
             client + "/styles/ui/images/*", 
             client + "/favicon.ico",
             client + "/bower_components/moment/*",
-            client + "/bower_components/moment-timezone/*"
+            client + "/bower_components/moment-timezone/*",
+            client + "/scripts/common.js"
         ],
         less: [],
         sass: [

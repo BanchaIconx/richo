@@ -168,6 +168,7 @@
         //initial
         $scope.action = $stateParams.action;
         contractService.GetPmDataInfo($stateParams.pmDataId, function (response) {
+            console.log(response.data);
             $scope.model = response.data;
             $scope.model.images.forEach(function (elm) {
                 elm.imageBase64 = elm.imageUrl
@@ -210,7 +211,7 @@
         }
 
         function save() {
-            $scope.model.pmStatusId = 2;
+            // $scope.model.pmStatusId = 2;
             $scope.model.lastUpdateUserId = $sessionStorage.user.userId
 
             if($scope.model.signatureImageUrl == null || $scope.model.signatureImageUrl == ""){

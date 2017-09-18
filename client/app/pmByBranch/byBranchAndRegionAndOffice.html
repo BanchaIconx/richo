@@ -24,14 +24,14 @@
                                     <tbody>
                                         <tr ng-repeat="x in model.data">
                                             <td>
-                                                <a href=""><i class="fa fa-search"></i></a>
+                                                <a href="#/pm/detail/{{x.pmDataId}}/view"><i class="fa fa-search"></i></a>
                                             </td>
                                             <td>{{x.wicketId}}</td>
                                             <td>
-                                                <md-checkbox ng-model="x.chk" aria-label="primary" class="no-margin custom-disabled" ng-checked="false"> </md-checkbox>
+                                                <md-checkbox aria-label="primary" class="no-margin custom-disabled" ng-checked="x.pmStatusId == 2"> </md-checkbox>
                                             </td>
-                                            <td>{{x.lastUpdateDateTime | date:'dd/MM/yyyy HH:mm'}}</td>
-                                            <td>{{x.lastUpdateUserId}}</td>
+                                            <td>{{x.pmDate | date:'dd/MM/yyyy HH:mm'}}</td>
+                                            <td>{{x.pmEngineerName}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

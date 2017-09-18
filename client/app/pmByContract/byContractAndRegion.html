@@ -24,7 +24,7 @@
                             <tbody>
                                 <tr ng-repeat="x in model.data">
                                     <td>
-                                        <a href="#/pm/contract/byContractAndRegionAndOffice/{{x.contractPoListId}}/{{model.contractName}}/{{x.po.poAddress}}/{{(x.po.poNumber +'-'+ x.po.poName)}}"><i class="fa fa-search"></i></a>
+                                        <a href="#/pm/contract/byContractAndRegionAndOffice/{{x.contractPoListId}}" ng-show="x.completeNoOfCounter > 0"><i class="fa fa-search"></i></a>
                                     </td>
                                     <td>{{(x.po.poNumber +'-'+ x.po.poName)}}</td>
                                     <td>{{x.noOfCounter | number}}</td>

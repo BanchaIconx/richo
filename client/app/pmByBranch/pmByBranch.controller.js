@@ -87,16 +87,18 @@
                 branchName: $stateParams.branchName,
                 regionName: $stateParams.regionName,
                 officeName: $stateParams.officeName,
-                total: 0,
+                total: response.data.length,
                 totalComplete: 0,
                 totalNoComplete: 0,
                 data: response.data
             };
             response.data.forEach(function (data) {
-                $scope.model.total += data.noOfCounter;
-                $scope.model.totalComplete += data.completeNoOfCounter;
-                $scope.model.totalNoComplete += (data.noOfCounter - data.completeNoOfCounter);
-            })
+                if(data.pmStatusId == 2){
+                    $scope.model.totalComplete++;
+                }else{
+                    $scope.model.totalNoComplete++;
+                }
+            });
         })
     }
 

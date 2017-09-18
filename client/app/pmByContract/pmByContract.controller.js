@@ -18,6 +18,7 @@
 
         //initial
         contractService.postGetContractAll(function (response) {
+            console.log(response);
             //set data
             $scope.model = {
                 total: 0,
@@ -50,12 +51,15 @@
         //initial
         contractService.getContractPoListByContract($stateParams.contractId, function (response) {
             $scope.model = {
-                contractName: $stateParams.contractName,
+                contractName: "",
                 total: 0,
                 totalComplete: 0,
                 totalNoComplete: 0,
                 data: response.data
             };
+            if(response.data.length > 0){
+                $scope.model.contractName = response.data[0].contract.contractName;
+            }
             response.data.forEach(function (data) {
                 $scope.model.total += data.noOfCounter;
                 $scope.model.totalComplete += data.completeNoOfCounter;
@@ -74,13 +78,17 @@
         //initial
         contractService.getContractPoListByPoRegion($stateParams.regionId, function (response) {
             $scope.model = {
-                contractName: $stateParams.contractName,
-                regionName: $stateParams.regionName,
+                contractName: "",
+                regionName: "",
                 total: 0,
                 totalComplete: 0,
                 totalNoComplete: 0,
                 data: response.data
             };
+            if(response.data.length > 0){
+                $scope.model.contractName = response.data[0].contract.contractName;
+                $scope.model.regionName = "เขต" + response.data[0].po.poRegion.districtName + " " + response.data[0].po.poRegion.provinceName;
+            }
             response.data.forEach(function (data) {
                 $scope.model.total += data.noOfCounter;
                 $scope.model.totalComplete += data.completeNoOfCounter;
@@ -97,21 +105,27 @@
 
         //initial
         contractService.getPmDataByContractPoList($stateParams.officeId, function (response) {
-            console.log(response);
             $scope.model = {
-                contractName: $stateParams.contractName,
-                regionName: $stateParams.regionName,
-                officeName: $stateParams.officeName,
-                total: 0,
+                contractName: "",
+                regionName: "",
+                officeName: "",
+                total: response.data.length,
                 totalComplete: 0,
                 totalNoComplete: 0,
                 data: response.data
             };
+            if(response.data.length > 0){
+                $scope.model.contractName = response.data[0].contractPoList.contract.contractName; 
+                $scope.model.regionName = "เขต" + response.data[0].contractPoList.po.poRegion.districtName + " " + response.data[0].contractPoList.po.poRegion.provinceName;;
+                $scope.model.officeName = response.data[0].contractPoList.po.poNumber + "-" + response.data[0].contractPoList.po.poName;
+            }
             response.data.forEach(function (data) {
-                $scope.model.total += data.noOfCounter;
-                $scope.model.totalComplete += data.completeNoOfCounter;
-                $scope.model.totalNoComplete += (data.noOfCounter - data.completeNoOfCounter);
-            })
+                if(data.pmStatusId == 2){
+                    $scope.model.totalComplete++;
+                }else{
+                    $scope.model.totalNoComplete++;
+                }
+            });
         })
     }
 })();

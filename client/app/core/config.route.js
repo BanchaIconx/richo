@@ -83,15 +83,15 @@
                 templateUrl: 'app/pmByContract/all.html'
             });
             $stateProvider.state('pm/contract/byContract',{
-                url: '/pm/contract/byContract/:contractId/:contractName',
+                url: '/pm/contract/byContract/:contractId',
                 templateUrl: 'app/pmByContract/byContract.html'
             });
             $stateProvider.state('pm/contract/byContractAndRegion',{
-                url: '/pm/contract/byContractAndRegion/:regionId/:contractName/:regionName',
+                url: '/pm/contract/byContractAndRegion/:regionId',
                 templateUrl: 'app/pmByContract/byContractAndRegion.html'
             });
             $stateProvider.state('pm/contract/byContractAndRegionAndOffice',{
-                url: '/pm/contract/byContractAndRegionAndOffice/:officeId/:contractName/:regionName/:officeName',
+                url: '/pm/contract/byContractAndRegionAndOffice/:officeId',
                 templateUrl: 'app/pmByContract/byContractAndRegionAndOffice.html'
             });
 

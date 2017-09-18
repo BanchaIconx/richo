@@ -86,7 +86,7 @@
             });
             contractService.GetContractPoListIdByContractIdAndPoId($scope.model.contractId, $scope.model.officeId, function (response) {
                 $scope.contractPoListId = response.data;
-            })
+            });
         }
 
         function search() {
@@ -154,6 +154,7 @@
         //init
         var tmp = angular.copy($sessionStorage.tmpEditEquipment);
         $scope.title = tmp.header;
+        console.log(tmp);
         $scope.model = {
             "contractPoDataId": 0,
             "templateId": null,
@@ -187,6 +188,7 @@
             //if field invalid return false
             if ($scope.submitForm.$invalid) return;
 
+            $scope.model.contractPoDataItems = [];
             $scope.templateItems.forEach(function (elm) {
                 $scope.model.contractPoDataItems.push({
                     "contractPoDataItemId": 0,
