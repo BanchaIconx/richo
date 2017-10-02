@@ -3,7 +3,7 @@
 
     angular.module('app.equipment')
         .controller('manageEquipmentCtrl', ['$scope', 'dropdownlistService', 'contractService', '$sessionStorage', '$state', '$filter', 'alertModalFactory', manageEquipmentCtrl])
-        .controller('addEquipmentCtrl', ['$scope', 'dropdownlistService', '$sessionStorage', 'templateService', 'contractService', 'alertModalFactory', addEquipmentCtrl])
+        .controller('addEquipmentCtrl', ['$scope', 'dropdownlistService', '$sessionStorage', 'templateService', 'contractService', 'alertModalFactory', '$stateParams', addEquipmentCtrl])
         .controller('editEquipmentCtrl', ['$scope', 'dropdownlistService', '$stateParams', '$sessionStorage', 'contractService', 'alertModalFactory', editEquipmentCtrl]);
 
     function manageEquipmentCtrl($scope, dropdownlistService, contractService, $sessionStorage, $state, $filter, alertModalFactory) {
@@ -44,16 +44,17 @@
         if ($sessionStorage.search != undefined) {
             if ($sessionStorage.search.page == 'equipment/manage') {
                 $scope.model = $sessionStorage.search.model;
+                if ($scope.model.contractId == null) return;
                 dropdownlistService.getDdlPoRegion($scope.model.contractId, function (response) {
                     $scope.ddlRegions = response.data;
+                    if ($scope.model.regionId == null) return;
                     dropdownlistService.getDdlPo($scope.model.regionId, function (response) {
                         $scope.ddlOffices = response.data;
-                        if($scope.model.officeId!=null){
-                            dropdownlistService.getDdlWicked($scope.model.contractId, $scope.model.officeId, function (response) {
-                                $scope.ddlCounter = response.data;
-                                search();
-                            });
-                        }
+                        if ($scope.model.officeId == null) return;
+                        dropdownlistService.getDdlWicked($scope.model.contractId, $scope.model.officeId, function (response) {
+                            $scope.ddlCounter = response.data;
+                            search();
+                        });
                     });
                 });
             }
@@ -121,13 +122,18 @@
                 },
                 data: value
             };
+            //set session search
+            $sessionStorage.search = {
+                page: "equipment/manage",
+                model: $scope.model
+            };
 
             if (action == "edit") {
                 //go edit page
                 $state.go('equipment/edit', { id: value.contractPoDataItemId });
             } else if (action == "add") {
                 //go add page
-                $state.go('equipment/add');
+                $state.go('equipment/add', { contractId: $scope.model.contractId });
             }
 
         }
@@ -141,7 +147,7 @@
         }
     }
 
-    function addEquipmentCtrl($scope, dropdownlistService, $sessionStorage, templateService, contractService, alertModalFactory) {
+    function addEquipmentCtrl($scope, dropdownlistService, $sessionStorage, templateService, contractService, alertModalFactory, $stateParams) {
         //variable
         $scope.title = {};
         $scope.model = {};
@@ -154,7 +160,6 @@
         //init
         var tmp = angular.copy($sessionStorage.tmpEditEquipment);
         $scope.title = tmp.header;
-        console.log(tmp);
         $scope.model = {
             "contractPoDataId": 0,
             "templateId": null,
@@ -167,7 +172,7 @@
             "template": null,
             "contractPoDataItems": []
         };
-        dropdownlistService.getDdlTemplates(function (response) {
+        dropdownlistService.getDdlTemplates($stateParams.contractId, function (response) {
             $scope.ddlTemplates = response.data;
         })
 

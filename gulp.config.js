@@ -15,7 +15,7 @@ module.exports = function() {
             './*.js'
         ],
         assets: [
-            client + "/app/**/*.html",
+            //client + "/app/**/*.html",
             client + "/bower_components/font-awesome/css/*", 
             client + "/bower_components/font-awesome/fonts/*", 
             client + "/bower_components/weather-icons/css/*", 
@@ -30,7 +30,8 @@ module.exports = function() {
             client + "/favicon.ico",
             client + "/bower_components/moment/*",
             client + "/bower_components/moment-timezone/*",
-            client + "/scripts/common.js"
+            client + "/scripts/common.js",
+            client + "/scripts/load-image.all.min.js"
         ],
         less: [],
         sass: [

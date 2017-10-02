@@ -68,7 +68,10 @@
             });
 
             //if field invalid return false
-            if ($scope.submitForm.$invalid) return;
+            if ($scope.submitForm.$invalid) {
+                angular.element('input.ng-invalid').first().focus();
+                return;
+            }
 
             if ($scope.model.password != $scope.model.confirmPassword) {
                 alertModalFactory.danger("รหัสผ่านกับรหัสยืนยัน ไม่ตรงกัน");
@@ -84,11 +87,14 @@
                 roleId: $scope.roleId,
                 userId: $scope.model.userId
             });
-            $scope.model.userBranches.push({
-                userBranchId: 0,
-                userId: $scope.model.userId,
-                ricohBranchId: $scope.branchId
-            });
+            if ($scope.roleId == 1) {
+                $scope.model.userBranches.push({
+                    userBranchId: 0,
+                    userId: $scope.model.userId,
+                    ricohBranchId: $scope.branchId
+                });
+            }
+
             userService.postAddUser($scope.model, function (response) {
                 alertModalFactory.success("เพิ่มผู้ใช้เรียบร้อย", function () {
                     window.history.back();
@@ -105,6 +111,8 @@
         //function
         $scope.save = save;
         $scope.cancelUser = cancelUser;
+        $scope.resetPassword = resetPassword;
+        $scope.activeUser = activeUser;
 
         //initial
         dropdownlistService.getDdlBranches(0, function (response) {
@@ -118,10 +126,26 @@
             $scope.model.lastUpdateUserId = $sessionStorage.user.userId;
         });
 
-        function save() {
-            //if field invalid return false
-            if ($scope.submitForm.$invalid) return;
+        function activeUser() {
+            userService.postActiveUser($scope.model, function (response) {
+                alertModalFactory.success("เปิดใช้งานผู้ใช้เรียบร้อย", function () {
+                    window.history.back();
+                });
+            })
+        }
 
+        function save() {
+
+            //if field invalid return false
+            if ($scope.submitForm.$invalid) {
+                angular.element('input.ng-invalid').first().focus();
+                return;
+            }
+
+            if ($scope.model.userRoles[0].roleId == 2) {
+                //สำนักงานใหญ่
+                $scope.model.userBranches = [];
+            }
             userService.postUpdateUser($scope.model, function (response) {
                 alertModalFactory.success("บันทึกข้อมูลเรียบร้อย", function () {
                     window.history.back();
@@ -135,6 +159,14 @@
                     window.history.back();
                 });
             })
+        }
+
+        function resetPassword() {
+            userService.postResetPassword($scope.model, function (response) {
+                alertModalFactory.success("รีเซ็ตรหัสผ่านเรียบร้อย", function () {
+                    window.history.back();
+                })
+            });
         }
     }
 
@@ -162,13 +194,19 @@
             });
 
             //if field invalid return false
+            if ($scope.submitForm.$invalid) {
+                angular.element('input.ng-invalid').first().focus();
+                return;
+            }
+
+            //if field invalid return false
             if ($scope.submitForm.$invalid) return;
 
             userService.changePassword($scope.user, function (response) {
                 alertModalFactory.success("เปลี่ยนรหัสผ่านเรียบร้อย", function () {
                     $scope.user = {
                         userId: $sessionStorage.user.userId
-                    }
+                    };
                 });
             })
         }

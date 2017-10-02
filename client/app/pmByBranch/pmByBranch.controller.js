@@ -37,12 +37,15 @@
         contractService.getContractPoListByBranch($stateParams.branchId, function (response) {
             //set data
             $scope.model = {
-                branchName: $stateParams.branchName,
+                branchName: "",
                 total: 0,
                 totalComplete: 0,
                 totalNoComplete: 0,
                 data: response.data
             };
+            if(response.data.length > 0){
+                $scope.model.branchName = response.data[0].ricohBranch.ricohBranchName
+            }
             response.data.forEach(function (data) {
                 $scope.model.total += data.noOfCounter;
                 $scope.model.totalComplete += data.completeNoOfCounter;
@@ -58,7 +61,7 @@
         //function
 
         //initial
-        contractService.getContractPoListByPoRegion($stateParams.regionId, function (response) {
+        contractService.GetContractPoListByPoRegion($stateParams.regionId, function (response) {
             $scope.model = {
                 branchName: $stateParams.branchName,
                 regionName: $stateParams.regionName,
@@ -67,6 +70,10 @@
                 totalNoComplete: 0,
                 data: response.data
             };
+            if(response.data.length > 0){
+                $scope.model.branchName = response.data[0].ricohBranch.ricohBranchName
+                $scope.model.regionName = response.data[0].po.poRegion.districtName + " " + response.data[0].po.poRegion.provinceName;
+            }
             response.data.forEach(function (data) {
                 $scope.model.total += data.noOfCounter;
                 $scope.model.totalComplete += data.completeNoOfCounter;
@@ -83,15 +90,21 @@
 
         //initial
         contractService.getPmDataByContractPoList($stateParams.officeId, function (response) {
+            console.log(response.data);
             $scope.model = {
-                branchName: $stateParams.branchName,
-                regionName: $stateParams.regionName,
-                officeName: $stateParams.officeName,
+                branchName: "",
+                regionName: "",
+                officeName: "",
                 total: response.data.length,
                 totalComplete: 0,
                 totalNoComplete: 0,
                 data: response.data
             };
+            if(response.data.length > 0){
+                $scope.model.branchName = response.data[0].contractPoList.ricohBranch.ricohBranchName
+                $scope.model.regionName = response.data[0].contractPoList.po.poRegion.districtName + " " + response.data[0].contractPoList.po.poRegion.provinceName;
+                $scope.model.officeName = response.data[0].contractPoList.po.poNumber + "-" + response.data[0].contractPoList.po.poName;
+            }
             response.data.forEach(function (data) {
                 if(data.pmStatusId == 2){
                     $scope.model.totalComplete++;

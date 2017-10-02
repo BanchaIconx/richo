@@ -13,15 +13,21 @@
                     <form name="submitForm" novalidate class="form-validation" ng-submit="save()">
                         <div class="row form-group">
                             <div class="col-sm-3">
-                                <label for="">เลขที่เคาน์เตอร์</label>
-                                <input type="text" class="form-control" ng-model="model.wicketId" required>
+                                <label class="required" for="">เลขที่เคาน์เตอร์</label>
+                                <input name="wicketId" type="text" class="form-control" ng-model="model.wicketId" required>
+                                <div ng-show="submitForm.wicketId.$dirty" ng-messages="submitForm.wicketId.$error" style="color:red" role="alert">
+                                    <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <label for="">Template Form</label>
-                                <select name="" id="" class="form-control" ng-model="model.templateId" ng-options="x.key as x.value for x in ddlTemplates"
+                                <label class="required" for="">Template Form</label>
+                                <select name="template" id="" class="form-control" ng-model="model.templateId" ng-options="x.key as x.value for x in ddlTemplates"
                                     ng-change="onTemplateChange(model.templateId)" required>
-                                <option value="">กรุณาเลือก</option>
-                            </select>
+                                    <option value="">กรุณาเลือก</option>
+                                </select>
+                                <div ng-show="submitForm.template.$dirty" ng-messages="submitForm.template.$error" style="color:red" role="alert">
+                                    <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                </div>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -31,18 +37,27 @@
                                     <th>ชื่อรายการ</th>
                                     <th>Brand</th>
                                     <th>Model</th>
-                                    <th>Serial</th>
+                                    <th><label for="" class="required">Serial</label></th>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="x in templateItems">
                                         <td>{{x.itemNo}}</td>
                                         <td>{{x.itemName}}</td>
-                                        <td><input type="text" class="form-control" placeholder="Brand" ng-if="x.brandModel"
-                                                ng-model="x.brand"></td>
-                                        <td><input type="text" class="form-control" placeholder="Model" ng-if="x.brandModel"
-                                                ng-model="x.model"></td>
-                                        <td><input type="text" class="form-control" placeholder="Serial No." ng-if="x.serialNo"
-                                                ng-model="x.serial" required></td>
+                                        <td>
+                                            <input type="text" name="brand{{$index}}" class="form-control" placeholder="Brand" ng-if="x.brandModel" ng-model="x.brand">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Model" ng-if="x.brandModel" ng-model="x.model">
+                                        </td>
+                                        <td>
+                                            <input name="serial{{$index}}" type="text" class="form-control" placeholder="Serial No." ng-if="x.serialNo" ng-model="x.serial"
+                                                required>
+                                            <dd ng-if="x.serialNo">
+                                                <div ng-show="submitForm['serial'+$index].$dirty" ng-messages="submitForm['serial'+$index].$error" style="color:red" role="alert">
+                                                    <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                                </div>
+                                            </dd>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

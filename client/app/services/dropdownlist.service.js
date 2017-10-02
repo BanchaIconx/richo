@@ -30,8 +30,14 @@
             'getDdlWicked': function (data, data2) {
                 return setupFactory.serviceGet('/dropdownList/getDdlWicked/', data, data2);
             },
-            'getDdlTemplates': function () {
-                return setupFactory.serviceGet('/dropdownList/getDdlTemplates');
+            'getDdlTemplates': function (data) {
+                return setupFactory.serviceGet('/dropdownList/getDdlTemplates/', data);
+            },
+            'getDdlContractByPoId': function (data) {
+                return setupFactory.serviceGet('/dropdownList/getDdlContractByPoId/', data);
+            },
+            'getDdlPmStatus': function () {
+                return setupFactory.serviceGet('/dropdownList/getDdlPmStatus');
             }
         }
 
@@ -75,9 +81,19 @@
                 .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
         }
 
-        function getDdlTemplates(successCallBack) {
-            $http(http.getDdlTemplates())
+        function getDdlTemplates(data, successCallBack) {
+            $http(http.getDdlTemplates(data))
                 .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
+        }
+
+        function getDdlContractByPoId(data, successCallBack) {
+            $http(http.getDdlContractByPoId(data))
+                .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
+        }
+
+        function getDdlPmStatus(successCallBack){
+            $http(http.getDdlPmStatus())
+            .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
         }
 
         return {
@@ -89,7 +105,9 @@
             getDdlPo: getDdlPo,
             getDdlContractPoData: getDdlContractPoData,
             getDdlWicked: getDdlWicked,
-            getDdlTemplates: getDdlTemplates
+            getDdlTemplates: getDdlTemplates,
+            getDdlContractByPoId: getDdlContractByPoId,
+            getDdlPmStatus: getDdlPmStatus
         };
     }
 })();

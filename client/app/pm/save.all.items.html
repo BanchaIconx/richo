@@ -2,142 +2,181 @@
 
     <div class="row ui-section">
         <div class="col-lg-8 clearfix">
-            <h2><button back-button></button> สร้างใบงานใหม่</h2>
+            <h2><button back-button></button> <span ng-show="action=='add'">สร้าง</span><span ng-show="action=='edit'">แก้ไข</span>ใบงานใหม่</h2>
         </div>
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">ที่ทำการไปษณีย์ : {{model.contractPoList.po.poNumber + " - " + model.contractPoList.po.poName}}</h3>
                 </div>
-                <div class="panel-body">
-                    <div class="row form-group">
-                        <div class="col-sm-12">
-                            สัญญา: {{model.contractPoList.contract.contractName}} - Wicket ID : {{model.wicketId}}
-                        </div>
-                    </div>
-                    <div class="row" ng-show="action == 'edit'">
-                        <div class="col-sm-4">
-                            <label for="">ชื่อผู้รับบริการ</label>
-                            <input type="text" class="form-control" ng-model="model.poOfficerName">
-                        </div>
-                        <div class="col-sm-2">
-                            <label for="">เบอร์โทร</label>
-                            <input type="text" class="form-control" ng-model="model.poOfficerPhoneNo">
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="">ชื่อช่าง</label>
-                            <input type="text" class="form-control" ng-model="model.pmEngineerName">
-                        </div>
-                        <div class="col-sm-2">
-                            <label for="">เลขที่ใบงาน</label>
-                            <input type="text" class="form-control" ng-model="model.jobNo">
-                        </div>
-                    </div>
-                    <div ng-repeat="x in model.pmDataItems">
-                        <div class="row">
+                <form name="submitForm" novalidate ng-submit="save()" class="form-validation">
+                    <div class="panel-body">
+                        <div class="row form-group">
                             <div class="col-sm-12">
-                                <hr style="margin: 10px 0;border-top: 1px solid rgb(193, 188, 188);">
-                            </div>
-                            <div class="col-sm-12">
-                                <h5 style="background-color: rgb(0, 150, 136);padding: 10px;margin: 0;color:#fff;" ng-click="x.open = !x.open" ng-init="x.open = false">ส่วนที่ {{x.itemNo}} : {{x.itemName}} <span class="fa fa-{{x.open?'plus':'minus'}} pull-right"></span></h5>
+                                สัญญา: {{model.contractPoList.contract.contractName}} - เคาน์เตอร์ : {{model.wicketId}}
                             </div>
                         </div>
-                        <div uib-collapse="x.open">
-                            <div class="row">
-                                <div class="col-sm-3" ng-show="x.brandModel">
-                                    <label for="">Brand</label>
-                                    <input type="text" class="form-control" ng-model="x.brand" placeholder="Brand">
-                                </div>
-                                <div class="col-sm-3" ng-show="x.brandModel">
-                                    <label for="">Model</label>
-                                    <input type="text" class="form-control" ng-model="x.model" placeholder="Model">
-                                </div>
-                                <div class="col-sm-3" ng-show="x.ipNo">
-                                    <label for="">IP</label>
-                                    <input type="text" class="form-control" ng-model="x.ipAddress" placeholder="0.0.0.0">
-                                </div>
-                                <div class="col-sm-3" ng-show="x.serialNo">
-                                    <label for="">Serial No.</label>
-                                    <input type="text" class="form-control" ng-model="x.enteredSerial" placeholder="Serial No.">
+                        <div class="row" ng-show="action == 'edit'">
+                            <div class="col-sm-3">
+                                <label for="" class="required">ชื่อผู้รับบริการ</label>
+                                <input type="text" class="form-control" name="poOfficerName" placeholder="ชื่อ นามสกุล" ng-model="model.poOfficerName" ng-required="action == 'edit'">
+                                <div ng-show="submitForm.poOfficerName.$dirty" ng-messages="submitForm.poOfficerName.$error" style="color:red" role="alert">
+                                    <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
                                 </div>
                             </div>
+                            <div class="col-sm-3">
+                                <label for="" class="required">เบอร์โทร</label>
+                                <input type="text" class="form-control" name="poOfficerPhoneNo" placeholder="02-999-9999" ng-model="model.poOfficerPhoneNo"
+                                    ng-required="action == 'edit'">
+                                <div ng-show="submitForm.poOfficerPhoneNo.$dirty" ng-messages="submitForm.poOfficerPhoneNo.$error" style="color:red" role="alert">
+                                    <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="" class="required">ชื่อวิศวกร</label>
+                                <input type="text" class="form-control" name="pmEngineerName" placeholder="ชื่อ นามสกุล" ng-model="model.pmEngineerName"
+                                    ng-required="action == 'edit'">
+                                <div ng-show="submitForm.pmEngineerName.$dirty" ng-messages="submitForm.pmEngineerName.$error" style="color:red" role="alert">
+                                    <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="" class="required">เลขที่ใบงาน</label>
+                                <input type="text" class="form-control" name="jobNo" ng-model="model.jobNo" ng-required="action == 'edit'">
+                                <div ng-show="submitForm.jobNo.$dirty" ng-messages="submitForm.jobNo.$error" style="color:red" role="alert">
+                                    <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-repeat="x in model.pmDataItems">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="">
-                                        <table class="table table-striped table-hover table-condensed">
-                                            <thead>
-                                                <tr>
-                                                    <th width="5%">Item</th>
-                                                    <th width="30%">Description</th>
-                                                    <th width="35%">Physical Check</th>
-                                                    <th width="30%">Remark</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody ng-repeat="y in x.pmDataChecklists">
-                                                <tr>
-                                                    <td>{{y.checklistItem}}</td>
-                                                    <td>{{y.equipmentChecklist.itemDescription}}</td>
-                                                    <td>
-                                                        <md-checkbox ng-model="y.phiscialCheck" aria-label="primary" class="no-margin">
-                                                            {{y.equipmentChecklist.phsicalCheckDescription}}</md-checkbox>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" ng-model="y.remark">
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <hr style="margin: 10px 0;border-top: 1px solid rgb(193, 188, 188);">
+                                </div>
+                                <div class="col-sm-12">
+                                    <h5 style="background-color: #ff686d;padding: 10px;margin: 0;color:#fff;" ng-click="x.open = !x.open" ng-init="x.open = false">ส่วนที่ {{x.itemNo}} : {{x.itemName}} <span class="fa fa-{{x.open?'plus':'minus'}} pull-right"></span></h5>
+                                </div>
+                            </div>
+                            <div uib-collapse="x.open">
+                                <div class="row">
+                                    <div class="col-sm-3" ng-show="x.brandModel">
+                                        <label for="" class="required">Brand</label>
+                                        <input name="brand{{$index}}" type="text" class="form-control" ng-model="x.brand" placeholder="Brand" ng-required="x.brandModel">
+                                        <div ng-show="submitForm['brand'+$index].$dirty" ng-messages="submitForm['brand'+$index].$error" style="color:red" role="alert">
+                                            <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" ng-show="x.brandModel">
+                                        <label for="" class="required">Model</label>
+                                        <input name="model{{$index}}" type="text" class="form-control" ng-model="x.model" placeholder="Model" ng-required="x.brandModel">
+                                        <div ng-show="submitForm['model'+$index].$dirty" ng-messages="submitForm['model'+$index].$error" style="color:red" role="alert">
+                                            <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" ng-show="x.ipNo">
+                                        <label for="" class="required">IP</label>
+                                        <input name="ip{{$index}}" type="text" class="form-control" ng-model="x.ip" placeholder="0.0.0.0" ng-required="x.ipNo">
+                                        <div ng-show="submitForm['ip'+$index].$dirty" ng-messages="submitForm['ip'+$index].$error" style="color:red" role="alert">
+                                            <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3" ng-show="x.serialNo">
+                                        <label for="" class="required">Serial No.</label>
+                                        <input name="serialNo{{$index}}" type="text" class="form-control" ng-model="x.enteredSerialNo" placeholder="Serial No." ng-required="x.serialNo">
+                                        <div ng-show="submitForm['serialNo'+$index].$dirty" ng-messages="submitForm['serialNo'+$index].$error" style="color:red" role="alert">
+                                            <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="">
+                                            <table class="table table-striped table-hover table-condensed">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="5%">Item</th>
+                                                        <th width="30%">Description</th>
+                                                        <th width="35%"><label for="" class="required">Physical Check</label></th>
+                                                        <th width="30%">Remark</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody ng-repeat="y in x.pmDataChecklists">
+                                                    <tr>
+                                                        <td>{{y.checklistItem}}</td>
+                                                        <td>{{y.equipmentChecklist.itemDescription}}  chk{{$parent.$index +''+ $index}}</td>
+                                                        <td>
+                                                            <md-checkbox name="chk{{$parent.$index +''+ $index}}" ng-model="y.phiscialCheck" aria-label="primary" class="no-margin" required>
+                                                                {{y.equipmentChecklist.phsicalCheckDescription}}</md-checkbox>
+                                                                <dd>
+                                                                        <div ng-show="submitForm['chk'+$parent.$index +''+ $index].$dirty" ng-messages="submitForm['chk'+$parent.$index +''+ $index].$error" style="color:red" role="alert">
+                                                                                <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                                                            </div>
+                                                                </dd>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" ng-model="y.remark">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <label for="">ไฟล์รูปภาพ</label>
-                            <hr style="margin: 10px 0;background-color: #000;">
-                            <input id="upload" style="display:none;" class="form-control" type="file" accept="image/*" capture="camera" ng-model="image"
-                                onchange="angular.element(this).scope().uploadImage(this.files)">
-                            <div class="row form-group" ng-repeat="im in model.images">
-                                <div class="col-xs-10">
-                                    <!-- <img ng-src="{{(im.imageUrl != "" || im.imageUrl != null) ? im.imageUrl : im.imageBase64}}" alt="" style="max-width:150px;height:auto;"> -->
-                                    <img ng-src="{{im.imageBase64}}" alt="" style="max-width:150px;height:auto;">
-                                </div>
-                                <div class="col-xs-2">
-                                    <a class="btn btn-danger" ng-click="removeImage($index)">ลบรูป</a>
-                                </div>
-                            </div>
-                            <hr style="margin: 10px 0;background-color: #000;">
-                        </div>
-                    </div>
-                    <div ng-show="action == 'edit'">
-                        <div class="row form-group" ng-show="model.signatureImageUrl != null && model.signatureImageUrl != ''">
+                        <div class="row form-group">
                             <div class="col-sm-12">
-                                <div>
-                                    <label for="">ลายเซ็น </label>
-                                    <button class="btn btn-danger" type="button" ng-click="model.signatureImageUrl = null">แก้ไขลายเซ็น</button>
-                                </div>
-                                <img src="{{model.signatureImageUrl}}" alt="">
+                                <label for="">หมายเหตุ</label>
+                                <textarea cols="30" rows="5" ng-model="model.remark" class="form-control"></textarea>
                             </div>
                         </div>
-
-                        <div class="row form-group" ng-show="model.signatureImageUrl == null || model.signatureImageUrl == ''">
+                        <div class="row">
                             <div class="col-sm-12">
-                                <div>
-                                    <label for="">ลายเซ็น </label>
-                                    <button class="btn btn-danger" type="button" ng-click="clearSignature()">Clear</button>
+                                <label for="">ไฟล์รูปภาพ</label>
+                                <hr style="margin: 10px 0;background-color: #000;">
+                                <input id="upload" style="display:none;" class="form-control" type="file" accept="image/*" capture="camera" ng-model="image"
+                                    onchange="angular.element(this).scope().uploadImage(this.files)">
+                                <div class="row form-group" ng-repeat="im in model.images">
+                                    <div class="col-xs-10">
+                                        <!-- <img ng-src="{{(im.imageUrl != "" || im.imageUrl != null) ? im.imageUrl : im.imageBase64}}" alt="" style="max-width:150px;height:auto;"> -->
+                                        <img ng-src="{{im.imageBase64}}" alt="" style="max-width:150px;height:auto;">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a class="btn btn-danger" ng-click="removeImage($index)">ลบรูป</a>
+                                    </div>
                                 </div>
-                                <div class="wrapper">
+                                <hr style="margin: 10px 0;background-color: #000;">
+                            </div>
+                        </div>
+                        <div ng-show="action == 'edit'">
+                            <div class="row form-group" ng-show="model.signatureImageUrl != null && model.signatureImageUrl != ''">
+                                <div class="col-sm-12">
+                                    <div>
+                                        <label for="" class="required">ลายเซ็น </label>
+                                        <button class="btn btn-danger" type="button" ng-click="clearSignature()">แก้ไขลายเซ็น</button>
+                                    </div>
+                                    <img src="{{model.signatureImageUrl}}" alt="">
+                                </div>
+                            </div>
 
-                                    <canvas style="border:1px solid;" id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+                            <div class="row form-group" ng-show="model.signatureImageUrl == null || model.signatureImageUrl == ''">
+                                <div class="col-sm-12">
+                                    <div>
+                                        <label for="" class="required">ลายเซ็น </label>
+                                        <button class="btn btn-danger" type="button" ng-click="clearSignature()">Clear</button>
+                                    </div>
+                                    <div class="wrapper">
+
+                                        <canvas style="border:1px solid;" id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <button class="btn btn-info" type="submit">บันทึกข้อมูล</button>
+                        <label class="btn btn-success" for="upload" style="margin:0 10px;"><i class="fa fa-cloud-upload"></i> เพิ่มรูปถ่าย</label>
+                        <button class="btn btn-default" type="button" onclick="window.history.back()">ยกเลิก</button>
                     </div>
-                    <button class="btn btn-info" ng-click="save()">บันทึกข้อมูล</button>
-                    <label class="btn btn-success" for="upload"><i class="fa fa-cloud-upload"></i> แบปรูปภาพ</label>
-                    <button class="btn btn-default" onclick="window.history.back()">ยกเลิก</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>

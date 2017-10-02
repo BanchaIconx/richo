@@ -11,3 +11,13 @@
 .custom-disabled {
     pointer-events: none;
 }
+
+label.required:after {
+    content: " *";
+    color: red;
+}
+
+[uib-typeahead-popup].dropdown-menu {
+	max-height: 255px;
+	overflow-y: auto;
+}

@@ -14,6 +14,14 @@
                     <select name="" id="" class="form-control" ng-model="poId" ng-options="x.key as x.value for x in ddlOffice" ng-change="onDdlBranchChange(poId)">
                         <option value="">กรุณาเลือก</option>
                     </select>
+                    <!-- <div id="scrollable-dropdown-menu" class="input-group">
+                        <input type="text" ng-model="selected" placeholder="รหัส-ชื่อที่ทำการไปรษณีย์"
+                        uib-typeahead="x as x.value for x in ddlOffice | filter:$viewValue | limitTo:100" 
+                        class="form-control" typeahead-on-select="onDdlBranchChange(selected.key)" typeahead-editable="false" typeahead-min-length="0" ng-change="change(selected)">
+                        <label class="input-group-addon btn btn-sm" ng-click="selected = undefined; onDdlBranchChange(null)">
+                           <span class="fa fa-times"></span>
+                        </label>                    
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -34,7 +42,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="x in model">
+                                <tr ng-repeat="x in model.list">
                                     <td>{{$index+1}}</td>
                                     <td>{{x.contract.contractName}}</td>
                                     <td>{{x.noOfCounter | number}}</td>
@@ -42,8 +50,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- <a href="#/pm/add/all/{{poId}}" class="btn btn-info" ng-show="model.length > 0">สร้างใบงาน</a> -->
-                    <a ng-click="CreateListPmDataByPoId(poId)" class="btn btn-info" ng-show="model.length > 0">สร้างใบงาน</a>
+                    <a class="btn btn-info" ng-show="model.list.length > 0 && !model.isCreate" confirm-click="CreateListPmDataByPoId(poId)" 
+                         confirm="ยืนยันสร้างใบงาน">สร้างใบงาน</a>
+                    <a href="#/pm/add/all/{{poId}}" class="btn btn-info" ng-show="model.list.length > 0 && model.isCreate">ตรวจเช็คเคาน์เตอร์</a>
                 </div>
             </div>
         </div>

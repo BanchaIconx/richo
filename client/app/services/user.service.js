@@ -27,6 +27,12 @@
             },
             'postCancelUser': function (data){
                 return setupFactory.servicePost('/admin/postCancelUser', data);
+            },
+            'postActiveUser': function (data){
+                return setupFactory.servicePost('/admin/postActiveUser', data);
+            },
+            'postResetPassword': function (data){
+                return setupFactory.servicePost('/admin/postResetPassword', data);
             }
         }
 
@@ -73,6 +79,16 @@
             $http(http.postCancelUser(user))
             .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
         }
+        
+        function postActiveUser(user, successCallBack){
+            $http(http.postActiveUser(user))
+            .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
+        }
+        
+        function postResetPassword(user, successCallBack){
+            $http(http.postResetPassword(user))
+            .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
+        }
 
         return {
             login: login,
@@ -81,7 +97,9 @@
             postAddUser: postAddUser,
             getUserByUserId: getUserByUserId,
             postUpdateUser: postUpdateUser,
-            postCancelUser: postCancelUser
+            postCancelUser: postCancelUser,
+            postResetPassword: postResetPassword,
+            postActiveUser: postActiveUser
         }
     }
 })();

@@ -10,7 +10,7 @@
             restrict: 'A',
             scope: true,
             link: function (scope, element, attrs) {
-                element.addClass("btn md-fab md-fab-sm md-primary md-button md-ink-ripple");
+                element.addClass("btn md-fab md-fab-sm md-info md-button md-ink-ripple");
                 element.append('<span class="fa fa-chevron-left"></span>');
                 element.on('click', function () {
                     window.history.back();

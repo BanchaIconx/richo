@@ -19,7 +19,7 @@
                                 <th>เคาน์เตอร์</th>
                                 <th>สถานะ PM</th>
                                 <th>วันที่ทำ PM</th>
-                                <th>ช่างที่ทำ PM</th>
+                                <th>วิศวกรที่ทำ PM</th>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="x in model.data">
@@ -28,7 +28,10 @@
                                     </td>
                                     <td>{{x.wicketId}}</td>
                                     <td>
-                                        <md-checkbox aria-label="primary" class="no-margin custom-disabled" ng-checked="x.pmStatusId == 2"> </md-checkbox>
+                                        <md-checkbox ng-checked="x.pmStatusId == 2" aria-label="primary" class="no-margin custom-disabled"> 
+                                            <span ng-show="(x.pmStatusId == 2)">เรียบร้อย</span>
+                                            <span ng-show="!(x.pmStatusId == 2)">สร้าง</span>
+                                        </md-checkbox>
                                     </td>
                                     <td>{{x.pmDate | date:'dd/MM/yyyy HH:mm'}}</td>
                                     <td>{{x.pmEngineerName}}</td>

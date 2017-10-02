@@ -12,35 +12,53 @@
                     <form name="submitForm" novalidate class="form-horizontal form-validation" ng-submit="add()">
                         <fieldset>
                             <div class="row form-group">
-                                <div class="col-sm-3">
-                                    <label for="">รหัสผู้ใช้งาน</label>
-                                    <input type="text" class="form-control" required ng-model="model.userId">
+                                <div class="col-sm-4">
+                                    <label class="required" for="">รหัสผู้ใช้งาน</label>
+                                    <input type="text" name="userId" class="form-control" required ng-model="model.userId">
+                                    <div ng-show="submitForm.userId.$dirty" ng-messages="submitForm.userId.$error" style="color:red" role="alert">
+                                        <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                    </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <label for="">ชื่อผู้ใช้งาน</label>
-                                    <input type="text" class="form-control" required ng-model="model.userName">
+                                <div class="col-sm-4">
+                                    <label class="required" for="">ชื่อผู้ใช้งาน</label>
+                                    <input type="text" name="username" class="form-control" required ng-model="model.userName">
+                                    <div ng-show="submitForm.username.$dirty" ng-messages="submitForm.username.$error" style="color:red" role="alert">
+                                        <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                    </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <label for="">สาขาของ Ricoh</label>
-                                    <select name="" id="" class="form-control" required ng-model="branchId" ng-options="x.key as x.value for x in ddlBranches">
+                                <div class="col-sm-4">
+                                    <label class="required" for="">สิทธิ์ผู้ใช้งาน</label>
+                                    <select name="role" id="" class="form-control" required ng-model="roleId" ng-options="x.key as x.value for x in ddlRoless">
                                         <option value="">กรุณาเลือก</option>
                                     </select>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label for="">สิทธิ์ผู้ใช้งาน</label>
-                                    <select name="" id="" class="form-control" required ng-model="roleId" ng-options="x.key as x.value for x in ddlRoless">
-                                        <option value="">กรุณาเลือก</option>
-                                    </select>
+                                    <div ng-show="submitForm.role.$dirty" ng-messages="submitForm.role.$error" style="color:red" role="alert">
+                                        <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col-sm-3">
-                                    <label for="">รหัสผ่าน</label>
-                                    <input type="password" class="form-control" required ng-model="model.password">
+                                <div class="col-sm-4" ng-show="roleId == 1">
+                                    <label class="required" for="">สาขาของ Ricoh</label>
+                                    <select name="branch" id="" class="form-control" ng-required="roleId == 1" ng-model="branchId" ng-options="x.key as x.value for x in ddlBranches">
+                                        <option value="">กรุณาเลือก</option>
+                                    </select>
+                                    <div ng-show="submitForm.branch.$dirty" ng-messages="submitForm.branch.$error" style="color:red" role="alert">
+                                        <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                    </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <label for="">รหัสผ่าน (อีกครั้ง)</label>
-                                    <input type="password" class="form-control" required ng-model="model.confirmPassword">
+                                <div class="col-sm-4">
+                                    <label class="required" for="">รหัสผ่าน</label>
+                                    <input type="password" name="password" class="form-control" required ng-model="model.password">
+                                    <div ng-show="submitForm.password.$dirty" ng-messages="submitForm.password.$error" style="color:red" role="alert">
+                                        <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="required" for="">รหัสผ่าน (อีกครั้ง)</label>
+                                    <input type="password" name="confirmPassword" class="form-control" required ng-model="model.confirmPassword">
+                                    <div ng-show="submitForm.confirmPassword.$dirty" ng-messages="submitForm.confirmPassword.$error" style="color:red" role="alert">
+                                        <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                    </div>
                                 </div>
                             </div>
                         </fieldset>

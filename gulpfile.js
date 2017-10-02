@@ -4,6 +4,10 @@ var browserSync = require('browser-sync');
 var config = require('./gulp.config')();
 var del = require('del');
 var $ = require('gulp-load-plugins')({lazy: true});
+var templateCache = require('gulp-angular-templatecache');
+var htmlmin = require('gulp-html-minifier');
+var removeHtmlComments = require('gulp-remove-html-comments');
+var concat = require('gulp-concat');
 
 gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
@@ -117,7 +121,24 @@ gulp.task('copy', function() {
         .pipe(gulp.dest(config.dist + '/'));
 });
 
-gulp.task('optimize', ['inject', 'sass-min'], function() {
+gulp.task('minHtml-template', function () {
+    log('convert html to templateCache');
+    return gulp.src('client/app/**/*.html')
+    .pipe(removeHtmlComments())
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(templateCache({ module: "app", root: 'app/' }))
+    .pipe(gulp.dest(config.dist + '/scripts'));
+});
+
+//javascript
+gulp.task('build-js', function () {
+    log('concat allJs');
+    return gulp.src([config.dist + '/scripts/app.js', config.dist + '/scripts/templates.js'])
+        .pipe(concat('app.js'))
+        .pipe(gulp.dest(config.dist + '/scripts/'));
+});
+
+gulp.task('optimize', ['minHtml-template', 'inject', 'sass-min'], function() {
     log('Optimizing the js, css, html');
 
     var assets = $.useref.assets({
@@ -125,7 +146,7 @@ gulp.task('optimize', ['inject', 'sass-min'], function() {
     });
     var cssFilter = $.filter('**/*.css', {restore: true});
     var jsFilter = $.filter('**/*.js', {restore: true});
-
+    
     return gulp
         .src(config.index)
         .pipe($.plumber({errorHandler: swallowError}))
@@ -150,7 +171,8 @@ gulp.task('serve', ['inject', 'sass'], function() {
 });
 
 gulp.task('build', ['optimize', 'copy'], function() {
-    startBrowserSync('dist');
+    // startBrowserSync('dist');
+    gulp.run('build-js');
 })
 
 gulp.task('serve-dist', function() {
@@ -160,8 +182,6 @@ gulp.task('serve-dist', function() {
 gulp.task('serve-docs', ['jade-docs'], function() {
     startBrowserSync('docs');
 })
-
-
 
 function clean(path, done) {
     log('Cleaning: ' + $.util.colors.blue(path));

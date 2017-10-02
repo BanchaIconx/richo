@@ -58,7 +58,19 @@
             }
         });
         $rootScope.getUserId = function () {
-            return $sessionStorage.user == undefined ? "" : $sessionStorage.user.userName;
+            //  $sessionStorage.user == undefined ? "" : $sessionStorage.user.userName;
+            var txt = "";
+            if($sessionStorage.user != undefined){
+                txt += $sessionStorage.user.userName;
+                if($sessionStorage.user.roleId == 1){
+                    //สาขา
+                    txt += " ("+$sessionStorage.user.branch.ricohBranchName+") ";
+                }else{
+                    //สำนักงานใหญ่
+                    txt += " (สำนักงานใหญ่) ";
+                }
+            }
+            return txt;
         }
     }]);
 })();

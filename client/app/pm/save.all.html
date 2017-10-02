@@ -9,32 +9,55 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">ที่ทำการไปษณีย์ : {{office.officeName}}</h3>
+                        <h3 class="panel-title">ที่ทำการไปรษณีย์ : {{officeName}}</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <label for="" class="required">สัญญา</label>
+                                <select name="" id="" class="form-control" ng-model="contractId" ng-change="ddlContractChange(contractId)" ng-options="x.key as x.value for x in ddlContract">
+                                    <option value="">กรุณาเลือก</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="model.length > 0">
                             <div class="col-sm-3">
-                                <label for="">ชื่อผู้รับบริการ</label>
-                                <input type="text" class="form-control" placeholder="ชื่อ นามสกุล" ng-model="saveData.poOfficerName" required>
+                                <label for="" class="required">ชื่อผู้รับบริการ</label>
+                                <input type="text" class="form-control" name="poOfficerName" placeholder="ชื่อ นามสกุล" ng-model="saveData.poOfficerName"
+                                    required ng-disabled="!showEdit">
+                                <div ng-show="submitForm.poOfficerName.$dirty" ng-messages="submitForm.poOfficerName.$error" style="color:red" role="alert">
+                                    <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <label for="">เบอร์โทร</label>
-                                <input type="text" class="form-control" placeholder="02-999-9999" ng-model="saveData.poOfficerPhoneNo" required>
+                                <label for="" class="required">เบอร์โทร</label>
+                                <input type="text" class="form-control" name="poOfficerPhoneNo" placeholder="02-999-9999" ng-model="saveData.poOfficerPhoneNo"
+                                    required ng-disabled="!showEdit">
+                                <div ng-show="submitForm.poOfficerPhoneNo.$dirty" ng-messages="submitForm.poOfficerPhoneNo.$error" style="color:red" role="alert">
+                                    <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <label for="">ชื่อช่าง</label>
-                                <input type="text" class="form-control" placeholder="ชื่อ นามสกุล" ng-model="saveData.pmEngineerName" required>
+                                <label for="" class="required">ชื่อวิศวกร</label>
+                                <input type="text" class="form-control" name="pmEngineerName" placeholder="ชื่อ นามสกุล" ng-model="saveData.pmEngineerName"
+                                    required ng-disabled="!showEdit">
+                                <div ng-show="submitForm.pmEngineerName.$dirty" ng-messages="submitForm.pmEngineerName.$error" style="color:red" role="alert">
+                                    <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                </div>
                             </div>
                             <div class="col-sm-3">
-                                <label for="">เลขที่ใบงาน</label>
-                                <input type="text" class="form-control" ng-model="saveData.jobNo" required>
+                                <label for="" class="required">เลขที่ใบงาน</label>
+                                <input type="text" class="form-control" name="jobNo" ng-model="saveData.jobNo" required ng-disabled="!showEdit">
+                                <div ng-show="submitForm.jobNo.$dirty" ng-messages="submitForm.jobNo.$error" style="color:red" role="alert">
+                                    <div ng-message="required && dirty">กรุณากรอกข้อมูล</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12" ng-show="model.length > 0">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">รายการเคาน์เตอร์ตามสัญญา</h3>
@@ -46,39 +69,33 @@
                                     <tr>
                                         <th width="5%">#</th>
                                         <th>ชื่อสัญญา</th>
-                                        <th>WicketID</th>
-                                        <th>สถานะ PM</th>
+                                        <th>เคาน์เตอร์</th>
+                                        <th>สถานะการตรวจเช็ค</th>
                                     </tr>
                                 </thead>
                                 <tbody ng-repeat="x in model">
                                     <tr>
                                         <td>
-                                            <a href="#/pm/add/all/items/{{x.pmDataId}}/add"><i class="fa fa-pencil"></i></a>
+                                            <!-- <a href="#/pm/add/all/items/{{x.pmDataId}}/add"><i class="fa fa-pencil"></i></a> -->
+                                            <a ng-show="x.pmStatusId == 2" href="#/pm/detail/{{x.pmDataId}}/edit"><i class="fa fa-search"></i></a>
+                                            <a ng-show="x.pmStatusId == 1" href="#/pm/add/all/items/{{x.pmDataId}}/add"><i class="fa fa-pencil"></i></a>
                                         </td>
                                         <td>{{x.contractPoList.contract.contractName}}</td>
                                         <td>{{x.wicketId}}</td>
                                         <td>
-                                            <md-checkbox ng-checked="x.pmStatusId == 2" aria-label="primary" class="no-margin custom-disabled"> </md-checkbox>
+                                            <md-checkbox ng-checked="x.isEdit" aria-label="primary" class="no-margin custom-disabled"> 
+                                                <span ng-show="x.isEdit">ตรวจเช็คเรียบร้อย</span>
+                                                <span ng-show="!x.isEdit">รอการตรวจเช็ค</span>
+                                            </md-checkbox>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-
-                        <div class="row form-group" ng-show="model[0].signatureImageUrl != null && model[0].signatureImageUrl != ''">
+                        <div class="row" ng-show="showEdit">
                             <div class="col-sm-12">
                                 <div>
-                                    <label for="">ลายเซ็น</label>
-                                    <button class="btn btn-danger" type="button" ng-click="model[0].signatureImageUrl = null">แก้ไขลายเซ็น</button>
-                                </div>
-                                <img src="{{model[0].signatureImageUrl}}" alt="">
-                            </div>
-                        </div>
-
-                        <div class="row form-group" ng-show="model[0].signatureImageUrl == null || model[0].signatureImageUrl == ''">
-                            <div class="col-sm-12">
-                                <div>
-                                    <label for="">ลายเซ็น</label>
+                                    <label for="" class="required">ลายเซ็น</label>
                                     <button class="btn btn-danger" type="button" ng-click="clearSignature()">Clear</button>
                                 </div>
                                 <div class="wrapper">
@@ -87,10 +104,9 @@
                                 </div>
                             </div>
                         </div>
+                        <button class="btn btn-info" type="submit" ng-show="model.length > 0 && showEdit">บันทึกใบงาน</button>
 
-                        <button class="btn btn-info" type="submit" ng-show="model.length > 0">บันทึกใบงาน</button>
-
-                        <button class="btn btn-default" ng-show="model.length > 0">ยกเลิกรายการ</button>
+                        <a class="btn btn-default" type="button" onclick="window.history.back()">ย้อนกลับ</a>
                     </div>
                 </div>
             </div>

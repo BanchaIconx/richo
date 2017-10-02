@@ -58,6 +58,7 @@
                                 <th>รหัสผู้ใช้งาน</th>
                                 <th>ชื่อผู้ใช้งาน</th>
                                 <th>สาขา</th>
+                                <th>สิทธิ์ใช้งาน</th>
                                 <th>สถานะ</th>
                             </thead>
                             <tbody>
@@ -68,6 +69,7 @@
                                     <td>{{x.userId}}</td>
                                     <td>{{x.userName}}</td>
                                     <td>{{x.userBranches}}</td>
+                                    <td>{{x.userRole[0].role.roleName}}</td>
                                     <td>{{x.statusId == 'A' ? 'ใช้งาน' : 'ยกเลิกใช้งาน'}}</td>
                                 </tr>
                             </tbody>

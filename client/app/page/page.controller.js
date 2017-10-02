@@ -16,19 +16,20 @@
             userId: "",
             password: ""
         };
-        $sessionStorage.user = undefined;
-
+        $sessionStorage.$reset();
         //function
         $scope.signin = signin;
 
         function signin() {
             $rootScope.menuGroup = undefined;
+            if($scope.submitForm.$invalid){
+                angular.element('input.ng-invalid').first().focus();
+            }
 
             //if not null
             if (!!$scope.model.userId && !!$scope.model.password) {
                 userService.login($scope.model, function (response) {
                     $sessionStorage.user = response.data;
-                    // console.log($sessionStorage.user);
                     //set up menu
                     $rootScope.menuGroup = $sessionStorage.user.role.allowMenuFunctions[0].menuFunctions;
                     $rootScope.userRole = $sessionStorage.user.roleId;
@@ -42,7 +43,7 @@
                     }
                 })
             } else {
-                setMessageError("กรูณากรอกข้อมูลให้ครบถ้วน");
+                setMessageError("กรุณากรอกข้อมูลให้ครบถ้วน");
             }
         }
 
@@ -64,7 +65,6 @@
         $scope.backUrl = "";
 
         //initial
-        console.log($sessionStorage.user);
         if($sessionStorage.user.roleId == 1){
             //สาขา
             $scope.backUrl = "#/pm/add";

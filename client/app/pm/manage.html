@@ -11,18 +11,35 @@
                 </div>
                 <div class="panel-body">
                     <form ng-submit="search()">
-                        <div class="row form-group">
+                        <div class="row">
                             <div class="col-sm-6">
                                 <label for="">รหัส/ชื่อที่ทำการไปรษณีย์</label>
                                 <select name="" id="" class="form-control" ng-model="model.poId" ng-options="x.key as x.value for x in ddlPo">
                                     <option value="">ทั้งหมด</option>
                                 </select>
+                                
+                                <!-- <div id="scrollable-dropdown-menu" class="input-group">
+                                        <input type="text" ng-model="selected" placeholder="รหัส-ชื่อที่ทำการไปรษณีย์"
+                                        uib-typeahead="x as x.value for x in ddlPo | filter:$viewValue | limitTo:20" 
+                                        class="form-control" typeahead-editable="false" typeahead-min-length="0">
+                                        <label class="input-group-addon btn btn-sm" ng-click="selected = undefined">
+                                           <span class="fa fa-times"></span>
+                                        </label>                    
+                                    </div> -->
                             </div>
                             <div class="col-sm-3">
                                 <label for="">เลขที่ใบงาน</label>
                                 <input type="text" class="form-control" ng-model="model.jobNo">
                             </div>
                             <div class="col-sm-3">
+                                <label for="">สถานะ</label>
+                                <select name="" ng-model="model.statusId" class="form-control" ng-options="x.key as x.value for x in ddlPmStatus">
+                                    <option value="">ทั้งหมด</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
                                 <label for="">วันที่เข้าทำงาน</label>
                                 <div class="input-group ui-datepicker">
                                     <input type="text" class="form-control" uib-datepicker-popup="{{format}}" is-open="popup1.opened" min-date="minDate" max-date="maxDate"
@@ -31,7 +48,7 @@
                                     <span class="input-group-addon input-sm" ng-click="open1()"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
-                            <!-- <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <label for="">ถึงวันที่</label>
                                 <div class="input-group ui-datepicker">
                                     <input type="text" class="form-control" uib-datepicker-popup="{{format}}" is-open="popup2.opened" min-date="minDate" max-date="maxDate"
@@ -39,9 +56,12 @@
                                         alt-input-formats="altInputFormats" ng-model="model.toDate" />
                                     <span class="input-group-addon input-sm" ng-click="open2()"><i class="fa fa-calendar"></i></span>
                                 </div>
-                            </div> -->
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="">&nbsp;</label>
+                                <dd><button type="submit" class="btn btn-info">ค้นหา</button></dd>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-info">ค้นหา</button>
                     </form>
                 </div>
             </div>
@@ -59,7 +79,8 @@
                                 <th>เลขที่ใบงาน</th>
                                 <th>วันที่เข้าทำงาน</th>
                                 <th>สัญญา</th>
-                                <th>Wicket</th>
+                                <th>ที่ทำการไปรษณีย์</th>
+                                <th>เคาน์เตอร์</th>
                                 <th>สถานะ</th>
                             </thead>
                             <tbody>
@@ -70,9 +91,13 @@
                                     <td>{{x.jobNo}}</td>
                                     <td>{{x.pmDate | date:'dd/MM/yyyy'}}</td>
                                     <td>{{x.contractPoList.contract.contractName}}</td>
+                                    <td>{{x.contractPoList.po.poNumber + '-' +x.contractPoList.po.poName}}</td>
                                     <td>{{x.wicketId}}</td>
                                     <td>
-                                        <md-checkbox ng-checked="x.pmStatusId == 2" aria-label="primary" class="no-margin custom-disabled"> </md-checkbox>
+                                        <md-checkbox ng-checked="x.pmStatusId == 2" aria-label="primary" class="no-margin custom-disabled"> 
+                                            <span ng-show="(x.pmStatusId == 2)">เรียบร้อย</span>
+                                            <span ng-show="!(x.pmStatusId == 2)">สร้าง</span>
+                                        </md-checkbox>
                                     </td>
                                 </tr>
                             </tbody>

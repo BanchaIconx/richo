@@ -34,7 +34,7 @@
             fixedHeader: true,                              // true, false
             fixedSidebar: true,                             // true, false
             pageTransition: pageTransitionOpts[0],          // 0, 1, 2, 3... and build your own
-            skin: '31'                                      // 11,12,13,14,15,16; 21,22,23,24,25,26; 31,32,33,34,35,36
+            skin: '36'                                      // 11,12,13,14,15,16; 21,22,23,24,25,26; 31,32,33,34,35,36
         };
         var color = {
             primary: '#009688',
@@ -46,13 +46,17 @@
             text: '#3D4051',
             gray: '#EDF0F1'
         };
+        // var apiUrl = 'http://10.10.2.108:55969';
+        // var apiUrl = 'http://101.109.250.26:8814/ricoh/api';
         var apiUrl = 'http://localhost:55969';
-
+        var pdfUrl = 'http://localhost/ricohImage/';
+        // var pdfUrl = 'http://101.109.250.26:8814/ricoh/files/ricohFile/';
         return {
             pageTransitionOpts: pageTransitionOpts,
             main: main,
             color: color,
-            apiUrl: apiUrl
+            apiUrl: apiUrl,
+            pdfUrl: pdfUrl
         }
     }
 

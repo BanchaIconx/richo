@@ -18,7 +18,6 @@
 
         //initial
         contractService.postGetContractAll(function (response) {
-            console.log(response);
             //set data
             $scope.model = {
                 total: 0,
@@ -76,7 +75,7 @@
         //function
 
         //initial
-        contractService.getContractPoListByPoRegion($stateParams.regionId, function (response) {
+        contractService.GetContractPoListByPoRegionAndContract($stateParams.regionId, $stateParams.contractId, function (response) {
             $scope.model = {
                 contractName: "",
                 regionName: "",
@@ -87,7 +86,7 @@
             };
             if(response.data.length > 0){
                 $scope.model.contractName = response.data[0].contract.contractName;
-                $scope.model.regionName = "เขต" + response.data[0].po.poRegion.districtName + " " + response.data[0].po.poRegion.provinceName;
+                $scope.model.regionName =response.data[0].po.poRegion.districtName + " " + response.data[0].po.poRegion.provinceName;
             }
             response.data.forEach(function (data) {
                 $scope.model.total += data.noOfCounter;
@@ -116,7 +115,7 @@
             };
             if(response.data.length > 0){
                 $scope.model.contractName = response.data[0].contractPoList.contract.contractName; 
-                $scope.model.regionName = "เขต" + response.data[0].contractPoList.po.poRegion.districtName + " " + response.data[0].contractPoList.po.poRegion.provinceName;;
+                $scope.model.regionName = response.data[0].contractPoList.po.poRegion.districtName + " " + response.data[0].contractPoList.po.poRegion.provinceName;;
                 $scope.model.officeName = response.data[0].contractPoList.po.poNumber + "-" + response.data[0].contractPoList.po.poName;
             }
             response.data.forEach(function (data) {

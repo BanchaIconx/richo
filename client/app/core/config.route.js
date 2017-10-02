@@ -43,7 +43,7 @@
                 templateUrl: 'app/equipment/manage.html'
             });
             $stateProvider.state('equipment/add',{
-                url: '/equipment/add',
+                url: '/equipment/add/:contractId',
                 templateUrl: 'app/equipment/add.html'
             });
             $stateProvider.state('equipment/edit',{
@@ -77,6 +77,11 @@
                 templateUrl: 'app/pm/search.html'
             });
 
+            $stateProvider.state('pm/search/add/all/item',{
+                url: '/pm/search/add/all/items/:pmDataId/:action',
+                templateUrl: 'app/pm/save.all.items.html'
+            });
+
             //pm by contract
             $stateProvider.state('pm/contract/all',{
                 url: '/pm/contract/all',
@@ -87,7 +92,7 @@
                 templateUrl: 'app/pmByContract/byContract.html'
             });
             $stateProvider.state('pm/contract/byContractAndRegion',{
-                url: '/pm/contract/byContractAndRegion/:regionId',
+                url: '/pm/contract/byContractAndRegion/:contractId/:regionId',
                 templateUrl: 'app/pmByContract/byContractAndRegion.html'
             });
             $stateProvider.state('pm/contract/byContractAndRegionAndOffice',{
@@ -101,16 +106,42 @@
                 templateUrl: 'app/pmByBranch/all.html'
             });
             $stateProvider.state('pm/branch/byBranch',{
-                url: '/pm/branch/byBranch/:branchId/:branchName',
+                url: '/pm/branch/byBranch/:branchId',
                 templateUrl: 'app/pmByBranch/byBranch.html'
             });
             $stateProvider.state('pm/branch/byBranchAndRegion',{
-                url: '/pm/branch/byBranchAndRegion/:regionId/:branchName/:regionName',
+                url: '/pm/branch/byBranchAndRegion/:regionId/:contractId',
                 templateUrl: 'app/pmByBranch/byBranchAndRegion.html'
             });
             $stateProvider.state('pm/branch/byBranchAndRegionAndOffice',{
-                url: '/pm/branch/byBranchAndRegionAndOffice/:officeId/:branchName/:regionName/:officeName',
+                url: '/pm/branch/byBranchAndRegionAndOffice/:officeId',
                 templateUrl: 'app/pmByBranch/byBranchAndRegionAndOffice.html'
+            });
+
+            //view pm contract
+            $stateProvider.state('viewContract/contract',{
+                url: "/viewContract",
+                templateUrl: ""
+            });
+            //view pm contract/branch
+            $stateProvider.state('viewContract/contract/branch',{
+                url: "/viewContract/:contractId",
+                templateUrl: ""
+            });
+            //view pm contract/branch/poRegion
+            $stateProvider.state('viewContract/contract/branch/poRegion',{
+                url: "/viewContract/:contractId/:branchId",
+                templateUrl: ""
+            });
+            //view pm contract/branch/poRegion/po
+            $stateProvider.state('viewContract/contract/branch/poRegion/po',{
+                url: "/viewContract/:contractId/:branchId/:poRegion",
+                templateUrl: ""
+            });
+            //view pm contract/branch/poRegion/po/wicket
+            $stateProvider.state('viewContract/contract/branch/poRegion/po/wicket',{
+                url: "/viewContract/:contractId/:branchId/:poRegion/:poId",
+                templateUrl: ""
             });
         }]
     );

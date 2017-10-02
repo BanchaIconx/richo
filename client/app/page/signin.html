@@ -3,7 +3,7 @@
     <div class="wrapper">
         <div class="main-body">
             <div class=""> <!-- body-inner -->
-                <form class="card bg-white">
+                <form name="submitForm" novalidate class="card bg-white form-validation" ng-submit="signin()">
                     <div class="card-content">
 
                         <section class="logo text-center">
@@ -16,14 +16,14 @@
                             <fieldset>
                                 <div class="form-group">
                                     <div class="ui-input-group">
-                                        <input type="text" class="form-control" ng-model="model.userId" ng-change="error.isError = false">
+                                        <input type="text" class="form-control" ng-model="model.userId" ng-change="error.isError = false" required>
                                         <span class="input-bar"></span>
                                         <label>USER ID</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="ui-input-group">
-                                        <input type="password" class="form-control" ng-model="model.password" ng-change="error.isError = false">
+                                        <input type="password" class="form-control" ng-model="model.password" ng-change="error.isError = false" required>
                                         <span class="input-bar"></span>
                                         <label>PASSWORD</label>
                                     </div>
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="card-action no-border">
-                        <md-button type="submit" class="md-raised btn-w-md btn-block btn-orange" ng-click="signin()">
+                        <md-button type="submit" class="md-raised btn-w-md btn-block btn-orange">
                             <i class="zmdi zmdi-square-right" style="padding-right:10px;"></i> Login
                         </md-button>
                     </div>

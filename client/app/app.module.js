@@ -3,21 +3,21 @@
 
     angular.module('app', [
         // Core modules
-         'app.core'
-        
+        'app.core'
+
         // Custom Feature modules
-        ,'app.page'
-        ,'app.user'
-        ,'app.equipment'
-        ,'app.pm'
-        ,'app.pmByContract'
-        ,'app.pmByBranch'
-        ,"app.common"
-        
+        , 'app.page'
+        , 'app.user'
+        , 'app.equipment'
+        , 'app.pm'
+        , 'app.pmByContract'
+        , 'app.pmByBranch'
+        , "app.common"
+
         // 3rd party feature modules
-        ,'mgo-angular-wizard'
-        ,'ui.tree'
-        ,'ngMap'
+        , 'mgo-angular-wizard'
+        , 'ui.tree'
+        , 'ngMap'
     ]);
 
 })();

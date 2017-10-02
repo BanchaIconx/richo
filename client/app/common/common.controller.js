@@ -25,12 +25,12 @@
         var token = "1";
 
         function serviceGet(url, data, data2) {
-            
+
             var _url = appConfig.apiUrl + url;
-            if(data != undefined){
+            if (data != undefined) {
                 _url += data;
             }
-            if(data2 != undefined){
+            if (data2 != undefined) {
                 _url += ("/" + data2);
             }
             return {
@@ -61,7 +61,7 @@
                     token: token
                 }
             }
-        } 
+        }
 
         function initialDatePicker(e) {
             e.format = "dd/MM/yyyy";
@@ -70,7 +70,6 @@
             }, e.today(), e.clear = function () {
                 e.dt = null
             }, e.disabled = function (e, t) {
-                //console.log(t);
                 // return "day" === t && (0 === e.getDay() || 6 === e.getDay())
             }, e.toggleMin = function () {
                 // e.minDate = e.minDate ? null : new Date
