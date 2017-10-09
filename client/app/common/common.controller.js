@@ -24,7 +24,7 @@
         // var token = $sessionStorage.user.token;
         var token = "1";
 
-        function serviceGet(url, data, data2) {
+        function serviceGet(url, data, data2, data3, data4) {
 
             var _url = appConfig.apiUrl + url;
             if (data != undefined) {
@@ -32,6 +32,12 @@
             }
             if (data2 != undefined) {
                 _url += ("/" + data2);
+            }
+            if (data3 != undefined) {
+                _url += ("/" + data3);
+            }
+            if (data4 != undefined) {
+                _url += ("/" + data4);
             }
             return {
                 method: 'GET',

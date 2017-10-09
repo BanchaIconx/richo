@@ -90,7 +90,6 @@
 
         //initial
         contractService.getPmDataByContractPoList($stateParams.officeId, function (response) {
-            console.log(response.data);
             $scope.model = {
                 branchName: "",
                 regionName: "",

@@ -47,10 +47,10 @@
             gray: '#EDF0F1'
         };
         // var apiUrl = 'http://10.10.2.108:55969';
-        // var apiUrl = 'http://101.109.250.26:8814/ricoh/api';
-        var apiUrl = 'http://localhost:55969';
-        var pdfUrl = 'http://localhost/ricohImage/';
-        // var pdfUrl = 'http://101.109.250.26:8814/ricoh/files/ricohFile/';
+        var apiUrl = 'http://101.109.250.26:8814/ricoh/api';
+        // var apiUrl = 'http://localhost:55969';
+        // var pdfUrl = 'http://localhost/ricohImage/';
+        var pdfUrl = 'http://101.109.250.26:8814/ricoh/files/ricohFile/';
         return {
             pageTransitionOpts: pageTransitionOpts,
             main: main,

@@ -1,13 +1,18 @@
-<div class="page" ng-controller="allBranchCtrl">
-
+<div class="page" ng-controller="pmByContractBranchPoController">
     <div class="row ui-section">
         <div class="col-lg-8 clearfix">
-            <h3> สถานะการทำ PM รายสาขา</h3>
+            <h3><button back-button></button> สถานะการทำ PM</h3>
         </div>
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">รายการสาขาของ Ricoh</h3>
+                    <h3 class="panel-title">
+                        <strong>สัญญา : </strong>{{model.data[0].contract.contractName}}
+                        <i class="fa fa-chevron-right"></i>
+                        <strong>สาขา : </strong>{{model.data[0].ricohBranch.ricohBranchName}}
+                        <i class="fa fa-chevron-right"></i>
+                        <strong>เขต : </strong>{{model.data[0].po.poRegion.districtName + ' ' + model.data[0].po.poRegion.provinceName}}
+                    </h3>
                 </div>
                 <div class="panel-body">
                     <p>จำนวนทั้งหมด : {{model.total | number}} จำนวนที่ทำ PM แล้ว : {{model.totalComplete | number}} จำนวนคงเหลือ
@@ -17,7 +22,7 @@
                         <table class="table table-striped table-hover table-condensed">
                             <thead>
                                 <th width="5%"></th>
-                                <th>สาขา</th>
+                                <th>ที่ทำการไปรษณีย์</th>
                                 <th>จำนวนทั้งหมด</th>
                                 <th>จำนวนที่ทำ PM แล้ว</th>
                                 <th>จำนวนคงเหลือ</th>
@@ -25,12 +30,13 @@
                             <tbody>
                                 <tr ng-repeat="x in model.data">
                                     <td>
-                                        <a href="#/pm/branch/byBranch/{{x.ricohBranchId}}"><i class="fa fa-search"></i></a>
+                                        <a href="#/viewContract/{{x.contractId}}/{{x.ricohBranchId}}/{{x.po.poRegionId}}/{{x.contractPoListId}}" 
+                                        ng-show="x.completeNoOfCounter > 0"><i class="fa fa-search"></i></a>
                                     </td>
-                                    <td>{{x.ricohBranchName}}</td>
-                                    <td>{{x.totalNoOfCounter | number}}</td>
-                                    <td>{{x.totalCompleteNoOfCounter | number}}</td>
-                                    <td>{{x.totalNoOfCounter - x.totalCompleteNoOfCounter | number}}</td>
+                                    <td>{{x.po.poName}}</td>
+                                    <td>{{x.noOfCounter | number}}</td>
+                                    <td>{{x.completeNoOfCounter | number}}</td>
+                                    <td>{{x.noOfCounter - x.completeNoOfCounter | number}}</td>
                                 </tr>
                             </tbody>
                         </table>

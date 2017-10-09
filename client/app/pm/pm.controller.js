@@ -50,11 +50,11 @@
 
         function search() {
             // $scope.model.toDate = $scope.model.fromDate;
-            if ($scope.selected == null) {
-                $scope.model.poId = 0;
-            } else {
-                $scope.model.poId = $scope.selected.key;
-            }
+            // if ($scope.selected == null) {
+            //     $scope.model.poId = 0;
+            // } else {
+            //     $scope.model.poId = $scope.selected.key;
+            // }
 
             $sessionStorage.search = {
                 page: 'pm/manage',
@@ -117,7 +117,7 @@
         }
 
         function change(value) {
-            console.log(value);
+            
         }
     }
 

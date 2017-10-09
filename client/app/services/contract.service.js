@@ -9,9 +9,6 @@
             'postGetContractAll': function () {
                 return setupFactory.servicePost('/contract/postGetContractAll', '');
             },
-            'getContractPoListByContract': function (data) {
-                return setupFactory.serviceGet('/contractPoList/getContractPoListByContract/', data);
-            },
             'GetContractPoListByPoRegion': function (data) {
                 return setupFactory.serviceGet('/contractPoList/GetContractPoListByPoRegion/', data);
             },
@@ -71,16 +68,23 @@
             },
             'getChangePmDataStatus' : function(data){
                 return setupFactory.serviceGet('/pmData/getChangePmDataStatus/', data);
+            },
+            'getContractPoListByContract': function (data) {
+                return setupFactory.serviceGet('/contractPoList/getContractPoListByContract/', data);
+            },
+            'getContractPoListByContractAndBranch': function (data, data2) {
+                return setupFactory.serviceGet('/contractPoList/getContractPoListByContractAndBranch/', data, data2);
+            },
+            'getContractPoListByContractAndBranchAndRegion': function (data, data2, data3) {
+                return setupFactory.serviceGet('/contractPoList/getContractPoListByContractAndBranchAndRegion/', data, data2, data3);
+            },
+            'getContractPoListByContractAndBranchAndRegionAndPo': function (data, data2, data3, data4) {
+                return setupFactory.serviceGet('/contractPoList/getContractPoListByContractAndBranchAndRegionAndPo/', data, data2, data3, data4);
             }
         };
 
         function postGetContractAll(successCallBack) {
             $http(http.postGetContractAll())
-                .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
-        }
-
-        function getContractPoListByContract(data, successCallBack) {
-            $http(http.getContractPoListByContract(data))
                 .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
         }
         
@@ -184,9 +188,28 @@
             .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
         }
 
+        function getContractPoListByContract(data, successCallBack) {
+            $http(http.getContractPoListByContract(data))
+                .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
+        }
+
+        function getContractPoListByContractAndBranch(data, data2, successCallBack) {
+            $http(http.getContractPoListByContractAndBranch(data, data2))
+                .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
+        }
+
+        function getContractPoListByContractAndBranchAndRegion(data, data2, data3, successCallBack) {
+            $http(http.getContractPoListByContractAndBranchAndRegion(data, data2, data3))
+                .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
+        }
+
+        function getContractPoListByContractAndBranchAndRegionAndPo(data, data2, data3, data4, successCallBack) {
+            $http(http.getContractPoListByContractAndBranchAndRegionAndPo(data, data2, data3, data4))
+                .then(CommonCallback.onSuccess(successCallBack), CommonCallback.onError);
+        }
+
         return {
             postGetContractAll: postGetContractAll,
-            getContractPoListByContract: getContractPoListByContract,
             GetContractPoListByPoRegionAndContract: GetContractPoListByPoRegionAndContract,
             getPmDataByContractPoList: getPmDataByContractPoList,
             getAllBranchPoSummary: getAllBranchPoSummary,
@@ -206,7 +229,11 @@
             postUpdateListPmData: postUpdateListPmData,
             postSearchPmData: postSearchPmData,
             getChangePmDataStatus: getChangePmDataStatus,
-            GetContractPoListByPoRegion: GetContractPoListByPoRegion
+            GetContractPoListByPoRegion: GetContractPoListByPoRegion,
+            getContractPoListByContract: getContractPoListByContract,
+            getContractPoListByContractAndBranch: getContractPoListByContractAndBranch,
+            getContractPoListByContractAndBranchAndRegion: getContractPoListByContractAndBranchAndRegion,
+            getContractPoListByContractAndBranchAndRegionAndPo: getContractPoListByContractAndBranchAndRegionAndPo,
         }
     }
 })();

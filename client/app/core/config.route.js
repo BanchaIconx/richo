@@ -82,66 +82,66 @@
                 templateUrl: 'app/pm/save.all.items.html'
             });
 
-            //pm by contract
-            $stateProvider.state('pm/contract/all',{
-                url: '/pm/contract/all',
-                templateUrl: 'app/pmByContract/all.html'
-            });
-            $stateProvider.state('pm/contract/byContract',{
-                url: '/pm/contract/byContract/:contractId',
-                templateUrl: 'app/pmByContract/byContract.html'
-            });
-            $stateProvider.state('pm/contract/byContractAndRegion',{
-                url: '/pm/contract/byContractAndRegion/:contractId/:regionId',
-                templateUrl: 'app/pmByContract/byContractAndRegion.html'
-            });
-            $stateProvider.state('pm/contract/byContractAndRegionAndOffice',{
-                url: '/pm/contract/byContractAndRegionAndOffice/:officeId',
-                templateUrl: 'app/pmByContract/byContractAndRegionAndOffice.html'
-            });
+            // //pm by contract
+            // $stateProvider.state('pm/contract/all',{
+            //     url: '/pm/contract/all',
+            //     templateUrl: 'app/pmByContract/all.html'
+            // });
+            // $stateProvider.state('pm/contract/byContract',{
+            //     url: '/pm/contract/byContract/:contractId',
+            //     templateUrl: 'app/pmByContract/byContract.html'
+            // });
+            // $stateProvider.state('pm/contract/byContractAndRegion',{
+            //     url: '/pm/contract/byContractAndRegion/:contractId/:regionId',
+            //     templateUrl: 'app/pmByContract/byContractAndRegion.html'
+            // });
+            // $stateProvider.state('pm/contract/byContractAndRegionAndOffice',{
+            //     url: '/pm/contract/byContractAndRegionAndOffice/:officeId',
+            //     templateUrl: 'app/pmByContract/byContractAndRegionAndOffice.html'
+            // });
 
-            //pm by branch
-            $stateProvider.state('pm/branch/all',{
-                url: '/pm/branch/all',
-                templateUrl: 'app/pmByBranch/all.html'
-            });
-            $stateProvider.state('pm/branch/byBranch',{
-                url: '/pm/branch/byBranch/:branchId',
-                templateUrl: 'app/pmByBranch/byBranch.html'
-            });
-            $stateProvider.state('pm/branch/byBranchAndRegion',{
-                url: '/pm/branch/byBranchAndRegion/:regionId/:contractId',
-                templateUrl: 'app/pmByBranch/byBranchAndRegion.html'
-            });
-            $stateProvider.state('pm/branch/byBranchAndRegionAndOffice',{
-                url: '/pm/branch/byBranchAndRegionAndOffice/:officeId',
-                templateUrl: 'app/pmByBranch/byBranchAndRegionAndOffice.html'
-            });
+            // //pm by branch
+            // $stateProvider.state('pm/branch/all',{
+            //     url: '/pm/branch/all',
+            //     templateUrl: 'app/pmByBranch/all.html'
+            // });
+            // $stateProvider.state('pm/branch/byBranch',{
+            //     url: '/pm/branch/byBranch/:branchId',
+            //     templateUrl: 'app/pmByBranch/byBranch.html'
+            // });
+            // $stateProvider.state('pm/branch/byBranchAndRegion',{
+            //     url: '/pm/branch/byBranchAndRegion/:regionId/:contractId',
+            //     templateUrl: 'app/pmByBranch/byBranchAndRegion.html'
+            // });
+            // $stateProvider.state('pm/branch/byBranchAndRegionAndOffice',{
+            //     url: '/pm/branch/byBranchAndRegionAndOffice/:officeId',
+            //     templateUrl: 'app/pmByBranch/byBranchAndRegionAndOffice.html'
+            // });
 
             //view pm contract
             $stateProvider.state('viewContract/contract',{
                 url: "/viewContract",
-                templateUrl: ""
+                templateUrl: "app/pmByContractBranch/contract.html"
             });
             //view pm contract/branch
             $stateProvider.state('viewContract/contract/branch',{
                 url: "/viewContract/:contractId",
-                templateUrl: ""
+                templateUrl: "app/pmByContractBranch/branch.html"
             });
             //view pm contract/branch/poRegion
             $stateProvider.state('viewContract/contract/branch/poRegion',{
                 url: "/viewContract/:contractId/:branchId",
-                templateUrl: ""
+                templateUrl: "app/pmByContractBranch/region.html"
             });
             //view pm contract/branch/poRegion/po
             $stateProvider.state('viewContract/contract/branch/poRegion/po',{
-                url: "/viewContract/:contractId/:branchId/:poRegion",
-                templateUrl: ""
+                url: "/viewContract/:contractId/:branchId/:poRegionId",
+                templateUrl: "app/pmByContractBranch/po.html"
             });
             //view pm contract/branch/poRegion/po/wicket
             $stateProvider.state('viewContract/contract/branch/poRegion/po/wicket',{
-                url: "/viewContract/:contractId/:branchId/:poRegion/:poId",
-                templateUrl: ""
+                url: "/viewContract/:contractId/:branchId/:poRegionId/:poId",
+                templateUrl: "app/pmByContractBranch/wicket.html"
             });
         }]
     );

@@ -39,7 +39,7 @@
                         $state.go('pm/add');
                     } else {
                         //สำนักงานใหญ่
-                        $state.go('pm/contract/all');
+                        $state.go('viewContract/contract');
                     }
                 })
             } else {
@@ -70,7 +70,7 @@
             $scope.backUrl = "#/pm/add";
         }else{
             //สำนักงานใหญ่
-            $scope.backUrl = "#/pm/contract/all";
+            $scope.backUrl = "#/viewContract";
         }
     }
 })();

@@ -19,7 +19,7 @@
         <li class="nav-divider" ng-show="userRole == 2"></li>
         <li ng-show="userRole == 2"><a md-button aria-label="meanu" href="#/user/manage"><i class="fa fa-user"></i>จัดการข้อมูลผู้ใช้ </a></li>
         <li class="nav-divider"></li> -->
-        <li class="nav-divider" ng-repeat-start="x in menuGroup"></li>
+        <li class="nav-divider" ng-repeat-start="x in menuGroup | orderBy: 'menuFunctionOrder'"></li>
         <li toggle-off-canvas data-highlight-active ng-repeat-end ng-class="{active:(('#'+currentState.url) == x.menuFunctionUrl)}" ng-click="clicked()"><a md-button aria-label="meanu" href="{{x.menuFunctionUrl}}"><i class="{{x.menuFunctionIcon}}"></i>{{x.menuFunctionName}}</a></li>
         <!-- default menu -->
         <li class="nav-divider"></li>

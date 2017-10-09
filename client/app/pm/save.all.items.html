@@ -103,7 +103,7 @@
                                                 <tbody ng-repeat="y in x.pmDataChecklists">
                                                     <tr>
                                                         <td>{{y.checklistItem}}</td>
-                                                        <td>{{y.equipmentChecklist.itemDescription}}  chk{{$parent.$index +''+ $index}}</td>
+                                                        <td>{{y.equipmentChecklist.itemDescription}}</td>
                                                         <td>
                                                             <md-checkbox name="chk{{$parent.$index +''+ $index}}" ng-model="y.phiscialCheck" aria-label="primary" class="no-margin" required>
                                                                 {{y.equipmentChecklist.phsicalCheckDescription}}</md-checkbox>
